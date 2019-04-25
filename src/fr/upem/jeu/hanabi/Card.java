@@ -1,115 +1,129 @@
-
-import java.util.*;
-
 /**
- * 
+ * Represent a card of the game Hanabi.
+ * @author Axel Durand.
+ * @version 0.1 .
  */
 public class Card {
 
     /**
-     * Default constructor
-     */
-    public Card() {
-    }
-
-    /**
-     * 
+     * Color of the card.     
+     * @since 0.1 ;
      */
     private final int color;
 
     /**
-     * 
+     * Value of the card.
+     * @since 0.1 ;
      */
+    
     private final int value;
 
     /**
-     * 
+     * Id of a card used for mix a Deck.
+     * @since 0.1 ;
      */
     private final int id;
 
-
-
-
+    
     /**
-     * @return
+     * convert a Card in a string
+     * @return a representation of the Card. The format returned of the Card is 'Color Value'.
      */
+    @Override
     public String toString() {
-        // TODO implement here
-        return "";
+        StringBuilder builder=new StringBuilder();
+        if(isWhite()) {
+        	builder.append("White ");
+        }
+        else if(isGreen()) {
+        	builder.append("Green ");
+        }
+        else if(isYellow()) {
+        	builder.append("Yellow ");
+        }
+        else if(isRed()) {
+        	builder.append("Red ");
+        }
+        else if(isBlue()) {
+        	builder.append("Blue ");
+        }
+        builder.append(this.value);
+        return builder.toString();
     }
 
     /**
+     * Check if two card are the same
      * @param o 
-     * @return
+     * 	The object must be a Card.
+     * @return true if the object got the same color and the same value.
+     * 		   false if the object doesn't have the same color and the same value.
      */
+    @Override
     public boolean equals(Object o) {
-        // TODO implement here
-        return false;
+    	Card c=(Card)o;
+    	return c.color==this.color && c.value==this.value;
     }
 
     /**
+     * Constructor of Card
      * @param color 
+     *  Color of the card
      * @param value 
+     * 	Value of the card
      * @param id
+     * 	Id of the card
+     * @since 0.1 ;
      */
-    public void Card(int color, int value, int id) {
-        // TODO implement here
+    public Card(int color, int value, int id) {
+        this.color=color;
+        this.value=value;
+        this.id=id;
     }
 
     /**
-     * @return
-     */
+     * Identifier color method.
+     * @return true if card is of white color.
+     * @since 0.1 ;
+     */   
     public boolean isWhite() {
-        // TODO implement here
-        return false;
+        return this.color==0;
     }
 
     /**
-     * @return
+     * Identifier color method.    
+     * @return true if card is of green color.
+     * @since 0.1 ;
      */
     public boolean isGreen() {
-        // TODO implement here
-        return false;
+        return this.color==1;
     }
 
     /**
-     * @return
+     * Identifier color method.
+     * @return true if card is of yellow color.
+     * @since 0.1 ;
      */
     public boolean isYellow() {
-        // TODO implement here
-        return false;
+         return this.color==2;
     }
 
     /**
-     * @return
+     * Identifier color method.
+     * @return true if card is of red color.
+     * @since 0.1 ;
      */
     public boolean isRed() {
-        // TODO implement here
-        return false;
+         return this.color==3;
     }
 
     /**
-     * @return
+     * Identifier color method.
+     * @return true if card is of blue color.
+     * @since 0.1 ;
      */
     public boolean isBlue() {
-        // TODO implement here
-        return false;
+           return this.color==4;
     }
 
-    /**
-     * @return
-     */
-    public int getColor() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * @return
-     */
-    public int getValue() {
-        // TODO implement here
-        return 0;
-    }
-
+   
 }
