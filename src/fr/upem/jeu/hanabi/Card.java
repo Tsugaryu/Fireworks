@@ -18,13 +18,13 @@ public class Card {
     
     private final int value;
 
-    /**
+    /*
      * Id of a card used for mix a Deck.
      * @since 0.1 ;
      */
-    private final int id;
+    /*private final int id;*/
 
-    
+ 
     /**
      * convert a Card in a string
      * @return a representation of the Card. The format returned of the Card is 'Color Value'.
@@ -74,10 +74,10 @@ public class Card {
      * 	Id of the card
      * @since 0.1 ;
      */
-    public Card(int color, int value, int id) {
+    public Card(int color, int value/*, int id*/) {
         this.color=color;
         this.value=value;
-        this.id=id;
+        /*this.id=id;*/
     }
 
     /**
@@ -124,6 +124,5 @@ public class Card {
     public boolean isBlue() {
            return this.color==4;
     }
-
    
 }

@@ -6,11 +6,11 @@ import java.util.*;
  */
 public class Discard extends CardStack {
 
+
     /**
-     * Default constructor
+     * 
      */
-    public Discard() {
-    }
+    private List<Card> discard;
 
     /**
      * 

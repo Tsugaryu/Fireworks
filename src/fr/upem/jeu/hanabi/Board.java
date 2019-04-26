@@ -15,12 +15,12 @@ public class Board {
     /**
      * 
      */
-    private ArrayArray<Card> board;
+    private Card[][] board;
 
     /**
      * 
      */
-    private Array<HandPlayer> gamerPlace;
+    private ArrayList<HandPlayer> gamerPlace;
 
     /**
      * 
@@ -49,8 +49,12 @@ public class Board {
 
 
 
-
-
+    public void setGamerPlace(ArrayList<HandPlayer> gamers) {
+    	this.gamerPlace=gamers;
+    }
+    public ArrayList<HandPlayer> getGamerPlace() {
+    	return this.gamerPlace;
+    }
 
     /**
      * @return
@@ -59,7 +63,7 @@ public class Board {
         // TODO implement here
         return false;
     }
-
+    public
     /**
      * @param c 
      * @param rank 

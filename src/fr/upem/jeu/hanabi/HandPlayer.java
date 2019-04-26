@@ -48,6 +48,9 @@ public class HandPlayer {
         // TODO implement here
         return null;
     }
+    public void addCard(Card card) {
+    	
+    }
 
     /**
      * @param b 
