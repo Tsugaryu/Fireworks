@@ -4,13 +4,8 @@ import java.util.*;
 /**
  * 
  */
-public class Board {
+public final class Board {
 
-    /**
-     * Default constructor
-     */
-    public Board() {
-    }
 
     /**
      * 
@@ -25,12 +20,12 @@ public class Board {
     /**
      * 
      */
-    private ErrorToken bankError;
+    private Token bankError;
 
     /**
      * 
      */
-    private ControlToken bankControl;
+    private Token bankControl;
 
     /**
      * 
@@ -45,7 +40,7 @@ public class Board {
     /**
      * 
      */
-    private static Board singleton;
+    private static volatile Board singleton=null;
 
 
 
@@ -60,34 +55,52 @@ public class Board {
      * @return
      */
     public boolean end() {
-        // TODO implement here
-        return false;
+        return this.bankError.isEmpty() || deck.getSizeDraw()==0;
     }
-    public
+    
     /**
      * @param c 
      * @param rank 
      * @return
      */
     public boolean putCard(Card c, int rank) {
-        // TODO implement here
+        if(this.board[rank].length==0) {
+        	this.board[rank][0]=c;
+        	return true;
+        }
+        else if(this.board[rank].length==c.getValue()-1 && this.board[rank][this.board[rank].length-1].getColor()==c.getColor()) {
+        	this.board[rank][this.board[rank].length]=c;
+        
+        }
         return false;
     }
 
     /**
-     * @param numberGamer
+     * 
      */
-    private void Board(int numberGamer) {
-        // TODO implement here
+    private  Board(ArrayList<HandPlayer> j, Deck d) {
+     
+    	this.bankError=new Token(3);
+    	this.bankControl=new Token(8);
+    	this.board=new Card[5][5];
+    	this.graveyard=new Discard();
+    	this.gamerPlace=j;
+    	this.deck=d;
     }
 
     /**
      * @param numberGamer 
      * @return
      */
-    public Board createBoard(int numberGamer) {
-        // TODO implement here
-        return null;
+    public static Board createBoard(int numberGamer) {
+    	if(Board.singleton!=null)return Board.singleton;
+    	//créer le Deck
+    	Deck deck=Deck.createDeck();
+    	//créer les joueurs
+    	ArrayList<HandPlayer> j=new ArrayList<HandPlayer>(numberGamer);
+    	Board board=new Board(j , deck);
+    	deck.deal(board);
+        return board;
     }
 
 }

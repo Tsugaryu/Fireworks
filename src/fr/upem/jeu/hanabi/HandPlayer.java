@@ -6,11 +6,7 @@ import java.util.*;
  */
 public class HandPlayer {
 
-    /**
-     * Default constructor
-     */
-    public HandPlayer() {
-    }
+ 
 
     /**
      * 

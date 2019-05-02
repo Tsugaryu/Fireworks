@@ -29,18 +29,25 @@ public final class Deck extends CardStack {
      */
     public void deal(Board board) {
     	ArrayList<HandPlayer> players=board.getGamerPlace();
-    	int i;
+    	int i,j;
     	if(players.size()<=3) {
     		//make draw player
     		for(i=0;i<players.size();i++){
-    			
+    			for(j=0;j<5;j++) {
+    				players.get(i).addCard(draw());
+    			}
     		}
     	}
     	else {
     		//make draw player
+    		for(i=0;i<players.size();i++){
+    			for(j=0;j<4;j++) {//number of card to draw
+    				players.get(i).addCard(draw());
+    			}
+    		}
     	}
-    	
-        
+    	//record the hand of the players
+    	board.setGamerPlace(players);     
     }
     public int getSizeDraw() {
     	return draw.size();
@@ -49,14 +56,15 @@ public final class Deck extends CardStack {
      * @param player 
      * @return
      */
-    public void draw(HandPlayer player) {
+    public Card draw() {
        Card drew=this.draw.pop();
-       player.addCard(drew);
-        return ;
+       
+        return drew;
     }
 
     /*on ne met pas de javadoc*/   
     private Deck(LinkedList<Card> d) {
+    	super();
     	this.draw=d;
     }
     /**
@@ -64,7 +72,7 @@ public final class Deck extends CardStack {
      * @return the singleton class Deck if not already created 
      * @return else the instance of the class created.
      */
-    public static Deck createDraw() {
+    public static Deck createDeck() {
         if(Deck.singleton!=null)return Deck.singleton;
         Deck d;
         int value,color;

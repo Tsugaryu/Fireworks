@@ -53,7 +53,7 @@ public class Token {
     /**
      * @param nombre
      */
-    public void Token(int nombre) {
+    public Token(int nombre) {
         // TODO implement here
     }
 

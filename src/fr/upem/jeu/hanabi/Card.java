@@ -124,5 +124,11 @@ public class Card {
     public boolean isBlue() {
            return this.color==4;
     }
+    int getColor() {
+    	return this.color;
+    }
+    int getValue() {
+    	return this.value;
+    }
    
 }
