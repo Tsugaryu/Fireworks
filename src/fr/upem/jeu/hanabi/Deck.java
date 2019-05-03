@@ -24,6 +24,7 @@ public final class Deck extends CardStack {
 
 
     /**
+     * deal the cards of the deck to the player.
      * @param board 
      * 
      */

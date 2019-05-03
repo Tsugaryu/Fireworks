@@ -2,38 +2,41 @@
 import java.util.*;
 
 /**
- * 
+ @author Axel Durand
+ * @version 0.1
+ * The Board class represents the board of the game.
+ * This class is a Singleton.
  */
 public final class Board {
 
 
     /**
-     * 
+     * Place where the fireworks are put.
      */
     private Card[][] board;
 
     /**
-     * 
+     * Representationn of the place and hand of the players.
      */
     private ArrayList<HandPlayer> gamerPlace;
 
     /**
-     * 
+     * Red token that are one of the mean to end the game
      */
     private Token bankError;
 
     /**
-     * 
+     * Blue token which control the actions of the player
      */
     private Token bankControl;
 
     /**
-     * 
+     * represents a Deck of card
      */
     private Deck deck;
 
     /**
-     * 
+     * Place where the discard card go.
      */
     private Discard graveyard;
 
@@ -43,25 +46,39 @@ public final class Board {
     private static volatile Board singleton=null;
 
 
-
+    /**
+     * Update gamers hand.
+     * @param gamers hand of the player
+     */
     public void setGamerPlace(ArrayList<HandPlayer> gamers) {
     	this.gamerPlace=gamers;
     }
+    /**
+     * getter of @see gamerplace.
+     * @return
+     */
     public ArrayList<HandPlayer> getGamerPlace() {
     	return this.gamerPlace;
     }
 
     /**
-     * @return
+     * check if all of the fireworks are finished or if the deck is empty or if there is error token anymore.
+     * @return the result of the description
      */
     public boolean end() {
-        return this.bankError.isEmpty() || deck.getSizeDraw()==0;
+    	int end=0;
+    	for(int i=0;i<this.board.length;i++) {
+    		if(this.board[i].length==5) {
+    			end++;
+    		}
+    	}
+        return this.bankError.isEmpty() || deck.getSizeDraw()==0||end>=5;
     }
     
     /**
-     * @param c 
-     * @param rank 
-     * @return
+     * @param c a card in the hand of a player.
+     * @param rank the place to put in.
+     * @return true if the place of the card is correct .
      */
     public boolean putCard(Card c, int rank) {
         if(this.board[rank].length==0) {
@@ -75,9 +92,7 @@ public final class Board {
         return false;
     }
 
-    /**
-     * 
-     */
+    
     private  Board(ArrayList<HandPlayer> j, Deck d) {
      
     	this.bankError=new Token(3);
@@ -89,6 +104,7 @@ public final class Board {
     }
 
     /**
+     * method factory of board.
      * @param numberGamer 
      * @return
      */
