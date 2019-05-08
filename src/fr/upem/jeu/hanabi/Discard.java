@@ -47,7 +47,12 @@ public class Discard extends CardStack {
      * @return
      */
     public static Discard createDiscard() {
-        return (new singleton());
+    	if(Discard.singleton!=null)return Discard.singleton;
+    	super();
+    	Discard dcard= new Discard();
+    	dcard.top=null;
+    	Discard.singleton=dcard;
+    	return dcard;
     }
 
     /**

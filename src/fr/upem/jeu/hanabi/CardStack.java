@@ -3,7 +3,7 @@ package fr.upem.jeu.hanabi;
 
 import java.util.*;
 
-/**Author : RaphaÃ«l BOURJOT
+/**Author : Raphaël BOURJOT
  * A variable of this class represent the hand of a player in the game.
  */
 public class CardStack {
@@ -12,12 +12,12 @@ public class CardStack {
      * Default constructor
      */
     public CardStack() {
-    	this.cardStructure=new List<Card>[5];
+    	this.cardStructure=new ArrayList<Card>();
     }
 
     /**
      * 
      */
-    private List<Card> cardStructure;
+    private ArrayList<Card> cardStructure;
 
 }
