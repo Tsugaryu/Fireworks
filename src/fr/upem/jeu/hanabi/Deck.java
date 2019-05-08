@@ -1,3 +1,5 @@
+package fr.upem.jeu.hanabi;
+
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -24,6 +26,7 @@ public final class Deck extends CardStack {
 
 
     /**
+     * deal the cards of the deck to the player.
      * @param board 
      * 
      */
