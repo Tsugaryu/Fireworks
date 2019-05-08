@@ -1,3 +1,5 @@
+package fr.upem.jeu.hanabi;
+
 
 import java.util.*;
 
@@ -24,34 +26,35 @@ public class Discard extends CardStack {
 
 
     /**
-     * @return
+     * @return a string which contains the display of all the cards in the discard
      */
     public String toString() {
-        // TODO implement here
-        return "";
+        String res="";
+        for (Card c : this.discard) {
+            res+=(" " + c);
+        }
+        return res;
     }
 
     /**
      * @param d
      */
     private void Discard(List<Card> d) {
-        // TODO implement here
+        
     }
 
     /**
      * @return
      */
     public static Discard createDiscard() {
-        // TODO implement here
-        return null;
+        return (new singleton());
     }
 
     /**
-     * @return
+     * @return the top of the discard 
      */
     public Card getTop() {
-        // TODO implement here
-        return null;
+        return this.top;
     }
 
 }

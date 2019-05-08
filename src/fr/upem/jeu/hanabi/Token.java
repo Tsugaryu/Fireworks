@@ -1,10 +1,14 @@
+package fr.upem.jeu.hanabi;
+
 
 import java.util.*;
 
-/**Author : RaphaÃ«l BOURJOT
- * 
+/**@author : Raphaël BOURJOT
+ * @version 0.1
  * A variable of this class represents the stack of token remaining.
  * The stack can contain control tokens or error tokens.
+ * Token.number is the number of token remaining
+ * Token.maxToken is the maximum number of token available. 0<=Token.number<=Token.number .
  */
 public class Token {
 
@@ -22,19 +26,16 @@ public class Token {
 
     /**
      * @param max
-     * Create a new variable Token. If max=3, the variable is an error Token. Else (when max=8), the variable is a control Token
+     * Create a new variable Token. Initialize maxToken and number to max.
      */
     public Token(int max) {
         this.maxToken=max;
-        if (max==3)
-            this.number=0;
-        else
-            this.number=8;
+        this.number=max;
     }
 
 
     /**
-     * remove 1 to the token.number for the variable this
+     * remove 1 to the token.number
      */
     public void removeToken() {
         this.number-=1;
@@ -64,9 +65,11 @@ public class Token {
     }
 
     /**
-     * add 1 to the token.number for the variable this
+     * add 1 to the token.number
      */
     public void addToken() {
+    	if (this.number==this.maxToken)
+    		throw new IllegalArgumentException("You can't have more tokens than the max !");
         this.number+=1;
     }
 

@@ -1,3 +1,5 @@
+package fr.upem.jeu.hanabi;
+
 
 import java.util.*;
 

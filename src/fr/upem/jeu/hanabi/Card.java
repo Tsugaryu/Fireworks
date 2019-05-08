@@ -1,3 +1,5 @@
+package fr.upem.jeu.hanabi;
+
 /**
  * Represent a card of the game Hanabi.
  * @author Axel Durand.
