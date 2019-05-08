@@ -15,10 +15,10 @@ public final class Board {
     /**
      * Place where the fireworks are put.
      */
-    private Card[][] board;
+    private Card[] board;
 
     /**
-     * Representationn of the place and hand of the players.
+     * Representation of the place and hand of the players.
      */
     private ArrayList<HandPlayer> gamerPlace;
 
@@ -42,6 +42,7 @@ public final class Board {
      */
     private Discard graveyard;
 
+    private Dialogue speakingInterface;
     /**
      * 
      */
@@ -70,7 +71,7 @@ public final class Board {
     public boolean end() {
     	int end=0;
     	for(int i=0;i<this.board.length;i++) {
-    		if(this.board[i].length==5) {
+    		if(this.board[i].getValue()==5) {
     			end++;
     		}
     	}
@@ -83,26 +84,24 @@ public final class Board {
      * @return true if the place of the card is correct .
      */
     public boolean putCard(Card c, int rank) {
-        if(this.board[rank].length==0) {
-        	this.board[rank][0]=c;
+        if(this.board[rank].getValue()==c.getValue()-1 && this.board[rank].getColor()==c.getColor()) {
+        	this.board[rank]=c;
         	return true;
-        }
-        else if(this.board[rank].length==c.getValue()-1 && this.board[rank][this.board[rank].length-1].getColor()==c.getColor()) {
-        	this.board[rank][this.board[rank].length]=c;
         
         }
         return false;
     }
 
     
-    private  Board(ArrayList<HandPlayer> j, Deck d) {
+    private  Board(ArrayList<HandPlayer> j, Deck d,Dialogue speak) {
      
     	this.bankError=new Token(3);
     	this.bankControl=new Token(8);
-    	this.board=new Card[5][5];
+    	this.board=new Card[5];
     	this.graveyard=new Discard();
     	this.gamerPlace=j;
     	this.deck=d;
+    	this.speakingInterface=speak;
     }
 
     /**
@@ -116,9 +115,40 @@ public final class Board {
     	Deck deck=Deck.createDeck();
     	//créer les joueurs
     	ArrayList<HandPlayer> j=new ArrayList<HandPlayer>(numberGamer);
-    	Board board=new Board(j , deck);
+    	Dialogue d=new Dialogue(numberGamer);
+    	Board board=new Board(j , deck,d);
     	deck.deal(board);
         return board;
+    }
+    public void fireworksResult() {
+    	int res=0;
+    	for(Card c : this.board) {
+    		res+=c.getValue();
+    	}
+    	if(res<=5) {
+    		System.out.println("Murabito A : What ?! That sucks");
+    		System.out.println("Murabito B : Returns the money back you thief !");
+    	}
+    	else if(res>5 && res<=10) {
+    		System.out.println("Murabito A : *Clap Clap*");
+    		System.out.println("Murabito B : *Clap Clap*");
+    	}
+    	else if(res>10 && res <=15) {
+    		System.out.println("Murabito A : That was classic.");
+    		System.out.println("Murabito B : Yeah, maybe they will do something better in another time ?");
+    	}
+    	else if(res>15 && res<=20) {
+    		System.out.println("Murabito A : That was excellent !");
+    		System.out.println("Murabito B : ");	
+    	}
+    	else if(res>20 && res<25) {
+    		
+    	}
+    	else if(res==25) {
+    		System.out.println("Murabito A : ");
+    		System.out.println("Murabito B : ");
+    		System.out.println("The Innkeeper : GOOOOOLDEN LEGENDAAAARYYYYYYY");
+    	}
     }
 
 }
