@@ -1,8 +1,9 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
-
+//[ipds]\s[:]\s[1-5]\s[1-5]\s[1-5WGYRB]
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.*;
-
 /**
  * 
  */
@@ -26,25 +27,30 @@ public class Dialogue {
      */
     public boolean isFormatCorrect(String s) {
         // TODO implement here
-        return false;
+        return Pattern.matches("[ipds]\\s[:]\\s[1-5]\\s[1-5]\\s[1-5WGYRB]", s) ;
     }
 
     /**
      * @param gamer 
      * @return
      */
-    public String sendDialogueToPlayer(int gamer) {
+  //  public String sendDialogueToPlayer(int gamer) {
         // TODO implement here
-        return "";
-    }
+    //    return "";
+    //}
 
     /**
      * @param builder 
      * @return
      */
     public String convertToSpeak(StringBuilder builder) {
-        // TODO implement here
-        return "";
+       StringBuilder maker=new StringBuilder();
+       String decortique=builder.toString();
+       for(int i=0;decortique.charAt(i)!='\0';i++) {
+    	   
+       }
+       //effacez le contenu de builder
+       return maker.toString();
     }
 
     /**
@@ -72,7 +78,7 @@ public class Dialogue {
     	System.out.println("In order to play to Hanabi with the command line,");
     	System.out.println("A mean for communicate with each player has been set by the developers");
     	System.out.println("This tutorial will show you the different command you can  use :");
-    	System.out.println("-Give an intel = i : [PlayerID], [Place of CardIDToGiveIntel] [Value or Color] ; {Other cards which have SAME value or SAME color}");
+    	System.out.println("-Give an intel = i : [PlayerID] [Place of CardIDToGiveIntel] [Value or Color] ; {Other cards which have SAME value or SAME color}");
     	System.out.println("WARNING : if you give more of one information and don't do it for ALL of the cards of a player. The game will precise it to this player.");
     	System.out.println("-Play a card = p : [Place of CardID] [Place of BoardColor]");
     	System.out.println("-Discard a card = d : [Place of CardID]");
