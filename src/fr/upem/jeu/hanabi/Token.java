@@ -60,7 +60,7 @@ public class Token {
      * @return a boolean. If the number of token is equal to the max, the method return true. Else, it return false.
      */
     public boolean isLimit() {
-        return (this.number==this.maxToken)
+        return (this.number==this.maxToken);
     }
 
     /**
