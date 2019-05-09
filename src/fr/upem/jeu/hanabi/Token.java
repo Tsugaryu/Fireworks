@@ -9,6 +9,8 @@ import java.util.*;
  * The stack can contain control tokens or error tokens.
  * Token.number is the number of token remaining
  * Token.maxToken is the maximum number of token available. 0<=Token.number<=Token.number .
+ * 
+ * @throws an IllegalArgumentException when you intent to use addToken on a Token variable which have number equal to max
  */
 public class Token {
 
