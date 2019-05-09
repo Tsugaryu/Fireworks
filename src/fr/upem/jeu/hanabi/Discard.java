@@ -1,4 +1,4 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
@@ -55,6 +55,10 @@ public class Discard extends CardStack {
      */
     public Card getTop() {
         return this.top;
+    }
+    /*ajoute une carte à la défausse*/
+    public void addCard() {
+    	
     }
 
 }

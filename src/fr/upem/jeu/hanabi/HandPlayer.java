@@ -1,4 +1,4 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
@@ -104,6 +104,9 @@ public class HandPlayer {
         // TODO implement here
        
     }
+    public String showHidden() {
+    	
+    }
 
     /**
      * @param rank 
@@ -129,5 +132,19 @@ public class HandPlayer {
        this.idPlayer=id;
        this.hand=hand;
     }
+    /*
+     * Le joueur décide de l'action à réaliser, 
+     * note : sa serait pas con de scinder les actions et les endroits où on balance certaines actions 
+     * sa permettrait d'avoir un traitement de la string plus facile
+     * */
+    public decideAction() {
+    	
+    }
+    /*Le joueur joue une carte à enregistrer dans le baord*/
+   selectCardToPlace({
+    	Discard dis=new Discard();
+    	Board b=new Board();
+    	b.
+    })
 
 }

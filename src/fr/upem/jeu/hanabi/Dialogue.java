@@ -20,7 +20,10 @@ public class Dialogue {
      */
     private ArrayList<StringBuilder> shortMemoryGamer;
 
-
+    
+    void setMemoryGamer(ArrayList<StringBuilder> smg) {
+    	this.shortMemoryGamer=smg;
+    }
     /**
      * @param s 
      * @return
@@ -44,11 +47,33 @@ public class Dialogue {
      * @return
      */
     public String convertToSpeak(StringBuilder builder) {
-       StringBuilder maker=new StringBuilder();
-       String decortique=builder.toString();
-       for(int i=0;decortique.charAt(i)!='\0';i++) {
+        //renverra la String une fois décortiqué
+    	StringBuilder maker=new StringBuilder();
+       String decortique=builder.toString();//String à découper et transformé
+       //Pattern de tranformation des couleurs
+       Pattern pWhite = Pattern.compile("W") ;  
+       Matcher mWhite = pWhite.matcher(decortique) ;  
+       
+       Pattern pGreen = Pattern.compile("G") ;  
+       Matcher mGreen = pGreen.matcher(decortique) ;  
+       
+       Pattern pBlue = Pattern.compile("B") ;  
+       Matcher mBlue = pBlue.matcher(decortique) ;  
+       
+       Pattern pYellow = Pattern.compile("Y") ;  
+       Matcher mYellow = pYellow.matcher(decortique) ;  
+       
+       Pattern pRed = Pattern.compile("R") ;  
+       Matcher mRed = pRed.matcher(decortique) ;  
+       
+       //Découpe au cas où il y aura plusieurs cartes à énoncer
+     
+       
+       
+       
+       //  String texteRemplace = m.replaceAll(";") ; 
     	   
-       }
+      
        //effacez le contenu de builder
        return maker.toString();
     }
