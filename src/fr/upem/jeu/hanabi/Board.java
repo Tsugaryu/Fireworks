@@ -1,4 +1,4 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
@@ -150,5 +150,54 @@ public final class Board {
     		System.out.println("The Innkeeper : GOOOOOLDEN LEGENDAAAARYYYYYYY");
     	}
     }
-
+    Discard getDiscard() {
+    	return this.graveyard;
+    }
+    void setDiscard(Discard d) {
+    	this.graveyard=d;
+    }
+    public String toString() {
+    	String newLine=System.lineSeparator();
+    	StringBuilder builder=new StringBuilder();
+    	//Affiche Deck
+       	builder.append(this.deck);
+       	builder.append(newLine);
+       	builder.append("-----------------");
+    	builder.append(newLine);
+       	//Affiche Token Erreur
+    	builder.append("Token rouge");
+    	builder.append(this.bankError);
+    	builder.append(newLine);
+       	builder.append("-----------------");
+    	builder.append(newLine);
+    	//Affiche Token Controle
+    	builder.append("Token contrôle");
+    	builder.append(this.bankControl);
+    	builder.append(newLine);
+       	builder.append("-----------------");
+    	builder.append(newLine);
+    	//Affiche le Board
+    	for(int i=0;i<this.board.length;i++) {
+    		//On affiche les Cartes
+    		builder.append(this.board[i]);
+    		builder.append(newLine);
+    	}
+       	builder.append("-----------------");
+    	builder.append(newLine);
+    	//Affiche la main des joueurs
+    	//NOTE : ATTENTION LE JOUEUR ACTUEL DOIT VOIR SA MAIN DE MANIERE CACHEE
+    	for(HandPlayer hp : this.gamerPlace) {
+    		builder.append(hp);
+    		builder.append(newLine);
+    	}
+    	builder.append(newLine);
+       	builder.append("-----------------");
+    	builder.append(newLine);
+    	//Affiche OU LA DISCARD
+    	builder.append(this.graveyard);
+    	builder.append(newLine);
+       	builder.append("-----------------");
+    	builder.append(newLine);
+    	return builder.toString();
+    }
 }

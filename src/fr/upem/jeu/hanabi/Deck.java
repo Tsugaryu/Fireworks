@@ -1,4 +1,4 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.Collections;
@@ -54,6 +54,10 @@ public final class Deck extends CardStack {
     }
     public int getSizeDraw() {
     	return draw.size();
+    }
+    @Override
+    public String toString(){
+    	return "Number of Card in the Deck"+getSizeDraw();
     }
     /**
      * @param player 
