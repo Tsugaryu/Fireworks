@@ -6,13 +6,13 @@ import java.util.*;
 /**
  * 
  */
-public class Discard extends CardStack {
+public class Discard {
 
 
     /**
      * 
      */
-    private List<Card> discard;
+    private LinkedList<Card> discard;
 
     /**
      * 
@@ -57,12 +57,12 @@ public class Discard extends CardStack {
     /**
      * @return the top of the discard 
      */
-     Card getTop() {
+    Card getTop() {
         return this.top;
     }
     /*ajoute une carte à la défausse*/
-    public void addCard() {
-    	
+    public void addCard(Card d) {
+    	this.discard.addLast(d);
     }
 
 }

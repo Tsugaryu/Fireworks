@@ -4,7 +4,7 @@
 import java.util.*;
 
 /**
- @author Axel Durand
+ @author Axel Durand & Raphaël BOURJOT
  * @version 0.1
  * The Board class represents the board of the game.
  * This class is a Singleton.

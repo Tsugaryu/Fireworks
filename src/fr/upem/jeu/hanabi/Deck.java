@@ -12,7 +12,7 @@ import java.util.Random;
  * The Deck class represents a stack of card in which player draw cards.
  * This class is a Singleton.
  */
-public final class Deck extends CardStack {
+public final class Deck {
 
 
     /**
@@ -57,7 +57,7 @@ public final class Deck extends CardStack {
     }
     @Override
     public String toString(){
-    	return "Number of Card in the Deck"+getSizeDraw();
+    	return "Number of Card in the Deck "+getSizeDraw();
     }
     /**
      * @param player 
@@ -74,6 +74,7 @@ public final class Deck extends CardStack {
     	super();
     	this.draw=d;
     }
+    
     /**
      * Creates a deck of 50 cards.
      * @return the singleton class Deck if not already created 
