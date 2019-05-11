@@ -1,4 +1,4 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
@@ -86,6 +86,7 @@ public class HandPlayer {
     }
 
     /**
+     * censer jouer une carde
      * @param b 
      * @return
      */
@@ -100,9 +101,25 @@ public class HandPlayer {
      * @param d 
      * @return
      */
+    //PART2
     public void giveInformation(HandPlayer otherPlayer, String s, Dialogue d) {
         // TODO implement here
        
+    }
+    public String showHidden() {
+    	StringBuilder builder=new StringBuilder();
+    	String newLine=System.lineSeparator();
+    	for(int i=0;i<this.hand.size();i++) {
+    		builder.append(i+1);
+    		builder.append(" ");
+    	}
+    	builder.append(newLine);
+    	for(int i=0;i<this.hand.size();i++) {
+    		builder.append("? ");
+    	}
+    	builder.append(newLine);
+    	return builder.toString();
+    	
     }
 
     /**
@@ -129,5 +146,19 @@ public class HandPlayer {
        this.idPlayer=id;
        this.hand=hand;
     }
+    /*
+     * Le joueur décide de l'action à réaliser, 
+     * note : sa serait pas con de scinder les actions et les endroits où on balance certaines actions 
+     * sa permettrait d'avoir un traitement de la string plus facile
+     * */
+    public decideAction() {
+    	
+    }
+    /*Le joueur joue une carte à enregistrer dans le baord*/
+   selectCardToPlace({
+    	Discard dis=new Discard();
+    	Board b=new Board();
+    	b.
+    })
 
 }

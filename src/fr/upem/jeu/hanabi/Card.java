@@ -1,4 +1,4 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 /**
  * Represent a card of the game Hanabi.
@@ -35,19 +35,19 @@ public class Card {
     public String toString() {
         StringBuilder builder=new StringBuilder();
         if(isWhite()) {
-        	builder.append("White ");
+        	builder.append("W");
         }
         else if(isGreen()) {
-        	builder.append("Green ");
+        	builder.append("G");
         }
         else if(isYellow()) {
-        	builder.append("Yellow ");
+        	builder.append("Y");
         }
         else if(isRed()) {
-        	builder.append("Red ");
+        	builder.append("R");
         }
         else if(isBlue()) {
-        	builder.append("Blue ");
+        	builder.append("B");
         }
         builder.append(this.value);
         return builder.toString();

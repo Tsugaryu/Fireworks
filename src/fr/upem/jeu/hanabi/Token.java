@@ -1,9 +1,9 @@
-package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
 
-/**@author : Raphaël BOURJOT
+/**@author : Raphael BOURJOT
  * @version 0.1
  * A variable of this class represents the stack of token remaining.
  * The stack can contain control tokens or error tokens.
