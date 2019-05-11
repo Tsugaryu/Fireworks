@@ -93,4 +93,9 @@ public class Token {
     	t2.addToken();
     	
     }
+    
+    int getNumber() {
+		return this.number;
+	}
+    
 }

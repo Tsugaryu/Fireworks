@@ -156,6 +156,13 @@ public final class Board {
     void setDiscard(Discard d) {
     	this.graveyard=d;
     }
+    Card[] getBoard() {
+		return this.board;
+	}
+    
+    Token getBankError() {
+		return this.bankError;
+	}
     public String toString() {
     	String newLine=System.lineSeparator();
     	StringBuilder builder=new StringBuilder();
