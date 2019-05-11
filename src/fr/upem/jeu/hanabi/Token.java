@@ -40,6 +40,7 @@ public class Token {
      * remove 1 to the token.number
      */
     public void removeToken() {
+    	if (isEmpty())throw new IllegalArgumentException("You can't have less token than zero!");
         this.number-=1;
     }
 
@@ -74,5 +75,22 @@ public class Token {
     		throw new IllegalArgumentException("You can't have more tokens than the max !");
         this.number+=1;
     }
-
+    public static void main(String[] args) {
+    	Token t1=new Token(1);
+    	Token t2=new Token(5);
+    	t1.removeToken();
+    	System.out.println(t1);
+    	System.out.println(t1.isEmpty());
+    	try {
+    		//t1.removeToken();
+        	t1.addToken();
+        	System.out.println(t1);
+        	
+        	
+    	}catch(IllegalArgumentException e) {
+    		
+    	}
+    	t2.addToken();
+    	
+    }
 }

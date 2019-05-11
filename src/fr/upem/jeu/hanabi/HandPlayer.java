@@ -24,7 +24,7 @@ public class HandPlayer {
     /**
      * 
      */
-    public Dialogue effectue;
+    private Dialogue effectue;
 
 
     /**
@@ -47,7 +47,7 @@ public class HandPlayer {
     }
     public Card discard(int place) {
         Card discarded;
-        discarded= this.hand.remove(place);
+        discarded= this.hand.remove(place-1);
         return discarded;
     }
 
@@ -75,10 +75,10 @@ public class HandPlayer {
     }
     public void swap(int c,int c1) {
     	
-    	Card card=this.hand.get(c);
-    	Card card1=this.hand.get(c1);
-    	this.hand.set(c1, card);
-    	this.hand.set(c,card1);
+    	Card card=this.selectCard(c);
+    	Card card1=this.selectCard(c1);
+    	this.hand.set(c1-1, card);
+    	this.hand.set(c-1,card1);
     	return;
     }
     public void addCard(Card card) {
@@ -109,6 +109,8 @@ public class HandPlayer {
     public String showHidden() {
     	StringBuilder builder=new StringBuilder();
     	String newLine=System.lineSeparator();
+    	builder.append("Hand of Player ");
+    	builder.append(this.idPlayer);
     	for(int i=0;i<this.hand.size();i++) {
     		builder.append(i+1);
     		builder.append(" ");
@@ -121,15 +123,45 @@ public class HandPlayer {
     	return builder.toString();
     	
     }
+    @Override
+    public String toString() {
+    	StringBuilder builder=new StringBuilder();
+    	String newLine=System.lineSeparator();
+    	builder.append("Hand of Player ");
+      	builder.append(newLine);
+    	builder.append(this.idPlayer);
+    	builder.append(newLine);
+    	for(int i=0;i<this.hand.size();i++) {
+    		builder.append(i+1);
+    		builder.append("  ");
+    		
+    	}
+    	builder.append(newLine);
+    	for(int i=0;i<this.hand.size();i++) {
+    		builder.append(this.hand.get(i));
+    		builder.append(" ");
+    	}
+    	builder.append(newLine);
+    	return builder.toString();
+    	
+    }
 
     /**
      * @param rank 
      * @return
      */
      Card selectCard(int rank) {
-        return this.hand.get(rank);
+        return this.hand.get(rank-1);
       
     }
+     /**
+      * @param rank 
+      * @return
+      */
+      static Card selectCard(int rank,HandPlayer player) {
+         return player.selectCard(rank);
+       
+     }
 
     /**
      * @return
@@ -142,7 +174,7 @@ public class HandPlayer {
      * @param id 
      * @param hand
      */
-    public void HandPlayer(int id, ArrayList<Card> hand) {
+    public HandPlayer(int id, ArrayList<Card> hand) {
        this.idPlayer=id;
        this.hand=hand;
     }
@@ -151,14 +183,51 @@ public class HandPlayer {
      * note : sa serait pas con de scinder les actions et les endroits où on balance certaines actions 
      * sa permettrait d'avoir un traitement de la string plus facile
      * */
-    public decideAction() {
+/*    public decideAction() {
     	
-    }
+    }*/
     /*Le joueur joue une carte à enregistrer dans le baord*/
-   selectCardToPlace({
+ /*  selectCardToPlace({
     	Discard dis=new Discard();
     	Board b=new Board();
     	b.
-    })
+    })*/
+    public static void main(String[] args) {
+    	ArrayList<Card> carte=new ArrayList<Card>();
+    	carte.add(new Card(1,4));
+    	carte.add(new Card(2,3));
+    	carte.add(new Card(4,2));
+    	carte.add(new Card(0,3));
+    	HandPlayer play=new HandPlayer(1,carte);
+    	System.out.println(play);
+    	System.out.println("Vrsion caché");
+    	System.out.println(play.showHidden());
+    	Card toDis=play.hand.get(3-1);
+    	Card dis=play.discard(3);
+    	if(!toDis.equals(dis)) {
+    		System.out.println("Test of discard not pass");
+    		return ;
+    	}
+    	play.addCard(dis);
+    	//play.play(BOARD);
+    	Card tomSelect=play.hand.get(0);
+    	Card selected =play.selectCard(1);
+    	if(!tomSelect.equals(selected)) {
+    		System.out.println("Test of card select  not pass");
+    		return ;
+    	}
+    	Card s1=play.selectCard(1);
+    	Card s2=play.selectCard(2);
+    	play.swap(1, 2);
+
+    
+    	
+    	if(!(play.selectCard(1).equals(s2) && play.selectCard(2).equals(s1))) {
+    		System.out.println("Test du swap nn passé");
+    		return;
+    	}
+    
+    	
+    }
 
 }
