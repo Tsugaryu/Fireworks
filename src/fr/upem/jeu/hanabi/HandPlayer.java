@@ -86,6 +86,7 @@ public class HandPlayer {
     }
 
     /**
+     * censer jouer une carde
      * @param b 
      * @return
      */
@@ -100,11 +101,24 @@ public class HandPlayer {
      * @param d 
      * @return
      */
+    //PART2
     public void giveInformation(HandPlayer otherPlayer, String s, Dialogue d) {
         // TODO implement here
        
     }
     public String showHidden() {
+    	StringBuilder builder=new StringBuilder();
+    	String newLine=System.lineSeparator();
+    	for(int i=0;i<this.hand.size();i++) {
+    		builder.append(i+1);
+    		builder.append(" ");
+    	}
+    	builder.append(newLine);
+    	for(int i=0;i<this.hand.size();i++) {
+    		builder.append("? ");
+    	}
+    	builder.append(newLine);
+    	return builder.toString();
     	
     }
 

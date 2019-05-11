@@ -40,7 +40,7 @@ public class Discard extends CardStack {
      * @param d
      */
     private void Discard(List<Card> d) {
-        
+    	super(); 
     }
 
     /**
@@ -48,7 +48,6 @@ public class Discard extends CardStack {
      */
     public static Discard createDiscard() {
     	if(Discard.singleton!=null)return Discard.singleton;
-    	super();
     	Discard dcard= new Discard();
     	dcard.top=null;
     	Discard.singleton=dcard;
@@ -58,7 +57,7 @@ public class Discard extends CardStack {
     /**
      * @return the top of the discard 
      */
-    public Card getTop() {
+     Card getTop() {
         return this.top;
     }
     /*ajoute une carte à la défausse*/

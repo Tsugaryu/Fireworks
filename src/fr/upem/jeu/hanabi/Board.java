@@ -179,9 +179,17 @@ public final class Board {
     	//Affiche le Board
     	for(int i=0;i<this.board.length;i++) {
     		//On affiche les Cartes
-    		builder.append(this.board[i]);
-    		builder.append(newLine);
+    		builder.append("J");
+    		builder.append(i);
+    		builder.append(" ");
+    		
     	}
+    	builder.append(newLine);
+    	for(int i=0;i<this.board.length;i++) {
+    		//On affiche les Cartes
+    		builder.append(this.board[i]);
+    	}
+    	builder.append(newLine);
        	builder.append("-----------------");
     	builder.append(newLine);
     	//Affiche la main des joueurs
@@ -193,7 +201,7 @@ public final class Board {
     	builder.append(newLine);
        	builder.append("-----------------");
     	builder.append(newLine);
-    	//Affiche OU LA DISCARD
+    	//on affichera la discard si l'utilisateur le demande --> on fera une fonction juste pour ça
     	builder.append(this.graveyard);
     	builder.append(newLine);
        	builder.append("-----------------");
