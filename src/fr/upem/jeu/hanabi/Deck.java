@@ -113,5 +113,21 @@ public final class Deck {
         Deck.singleton=d;
         return d;
     }
+    public static void main(String[] args) {
+    	Deck d= Deck.createDeck();
+    	Card c;
+    	int un=0,deux=0,trois=0,quatre=0,cinq=0;
+    	while(d.getSizeDraw()!=0) {
+    		c= d.draw();
+    		System.out.print(c+" ");
+    		if(c.getValue()==1)un+=1;
+    		if(c.getValue()==2)deux+=1;
+    		if(c.getValue()==3)trois+=1;
+    		if(c.getValue()==4)quatre+=1;
+    		if(c.getValue()==5)cinq+=1;
+    	}
+    	System.out.println();
+    	System.out.println("Un="+un+"Deux="+deux+"trois="+trois+"quatre="+quatre+"cinq="+cinq);
+    }
 
 }

@@ -77,7 +77,8 @@ public class Card {
      * @since 0.1 ;
      */
     public Card(int color, int value/*, int id*/) {
-        this.color=color;
+    	if(color>5||value>5);//lancez une exception
+    	this.color=color;
         this.value=value;
         /*this.id=id;*/
     }
@@ -131,6 +132,15 @@ public class Card {
     }
     int getValue() {
     	return this.value;
+    }
+    //Main de test
+    public static void main(String[] args) {
+    	Card c1=new Card(1,1);
+    	Card c2=new Card(3,2);
+    	Card c3=new Card(1,2);
+    	System.out.println(c2);
+    	System.out.println(c1.equals(c3));
+    	
     }
    
 }
