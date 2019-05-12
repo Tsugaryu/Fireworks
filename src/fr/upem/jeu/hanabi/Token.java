@@ -1,4 +1,4 @@
-//package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi;
 
 
 /**@author : Raphael BOURJOT

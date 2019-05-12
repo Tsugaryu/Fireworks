@@ -1,4 +1,4 @@
-//package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
@@ -70,6 +70,7 @@ public final class Board {
      */
     public boolean end() {
     	int end=0;
+    	System.out.println(this.board.length);
     	for(int i=0;i<this.board.length;i++) {
     		if(this.board[i].getValue()==5) {
     			end++;
@@ -98,6 +99,9 @@ public final class Board {
     	this.bankError=new Token(3);
     	this.bankControl=new Token(8);
     	this.board=new Card[5];
+    	int i;
+    	for (i=0;i<this.board.length;i++)
+    		this.board[i]=new Card(-1,-1);
     	this.graveyard=Discard.createDiscard();
     	this.gamerPlace=j;
     	this.deck=d;

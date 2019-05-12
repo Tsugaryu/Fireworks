@@ -1,4 +1,4 @@
-//package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi;
 
 //[ipds]\s[:]\s[1-5]\s[1-5]\s[1-5WGYRB]
 import java.util.regex.Pattern;
@@ -108,7 +108,7 @@ public class Dialogue {
     	System.out.println("-Play a card = p : [Place of CardID] [Place of BoardColor]");
     	System.out.println("-Discard a card = d : [Place of CardID]");
     	System.out.println("-Swap two cards = s :  [PlaceOfCardID1] [PlaceOfCardID2]");
-    	System.out.println("Each color has a code which represent him in the dialogue :");
+    	System.out.println("Each color has a code which represent him in the dialogue");
     	/*System.out.println("W:White");
     	System.out.println("G:Green");
     	System.out.println("Y:Yellow");

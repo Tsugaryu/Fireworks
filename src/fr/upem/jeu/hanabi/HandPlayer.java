@@ -1,11 +1,11 @@
-//package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
 import java.io.*;
 
 /**
- * 
+ * @author Raphael BOURJOT
  */
 public class HandPlayer {
 
@@ -195,14 +195,11 @@ public class HandPlayer {
     })*/
     
     public static String readActionPlayer() throws IOException{
-		System.out.println("Fichier que vous souhaiter voir?");
 		String s="";
 		try{
-	
 		InputStreamReader ise=new InputStreamReader(System.in);
 		BufferedReader be=new BufferedReader(ise);
 		s=be.readLine();
-	    
 		return s;
 		}catch(IOException e){
 			throw e;
@@ -212,22 +209,22 @@ public class HandPlayer {
     
     public static boolean choiceActionIsOk(String s) {
     	int i,j;
+    	if (s.equals("q"))
+    		return true;
     	for (i=1;i<=5;i++) {
     		if (s.equals("d : "+i))
     			return true;
     		for (j=1;j<=5;j++) {
     			if (s.equals("p : "+ i + " " + j))
     				return true;
+    			if (s.equals("s : "+ i + " " + j))
+    				return true;
     		}
     	}
     	return false;    	
     }
     
-    public static boolean selectCardIsOk(String s) {
-    	if (!s.equals("1") || !s.equals("2") || !s.equals("3") || !s.equals("4") || !s.equals("5"))
-    		return false;
-    	return true;
-    }
+
     
     public static void main(String[] args) {
     	ArrayList<Card> carte=new ArrayList<Card>();

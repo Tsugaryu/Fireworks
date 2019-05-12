@@ -1,4 +1,4 @@
-//package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi;
 
 /**
  * Represent a card of the game Hanabi.
@@ -34,6 +34,8 @@ public class Card {
     @Override
     public String toString() {
         StringBuilder builder=new StringBuilder();
+        if (this.color==-1)
+        	return "";
         if(isWhite()) {
         	builder.append("W");
         }

@@ -1,4 +1,4 @@
-//package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi;
 
 
 import java.util.Collections;
@@ -33,6 +33,7 @@ public final class Deck {
     public void deal(Board board) {
     	ArrayList<HandPlayer> players=board.getGamerPlace();
     	int i,j;
+    	System.out.println(this.draw.size());
     	if(players.size()<=3) {
     		//make draw player
     		for(i=0;i<players.size();i++){
@@ -50,7 +51,8 @@ public final class Deck {
     		}
     	}
     	//record the hand of the players
-    	board.setGamerPlace(players);     
+    	board.setGamerPlace(players);   
+    	System.out.println(this.draw.size());
     }
     public int getSizeDraw() {
     	return draw.size();
@@ -66,7 +68,7 @@ public final class Deck {
     public Card draw() {
        Card drew=this.draw.pop();
        
-        return drew;
+       return drew;
     }
 
     /*on ne met pas de javadoc*/   
