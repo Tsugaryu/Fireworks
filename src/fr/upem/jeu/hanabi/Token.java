@@ -7,8 +7,6 @@ import java.util.*;
  * @version 0.1
  * A variable of this class represents the stack of token remaining.
  * The stack can contain control tokens or error tokens.
- * Token.number is the number of token remaining
- * Token.maxToken is the maximum number of token available. 0<=Token.number<=Token.number .
  * 
  * @throws an IllegalArgumentException when you intent to use addToken on a Token variable which have number equal to max
  */
@@ -17,12 +15,12 @@ public class Token {
 
 
     /**
-     * 
+     * Token.number is the number of token remaining
      */
     private int number;
 
     /**
-     * 
+     * Token.maxToken is the maximum number of token available. 0<=Token.number<=Token.number .
      */
     private final int maxToken;
 

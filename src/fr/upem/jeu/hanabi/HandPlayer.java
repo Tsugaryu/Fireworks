@@ -2,6 +2,7 @@
 
 
 import java.util.*;
+import java.io.*;
 
 /**
  * 
@@ -90,8 +91,8 @@ public class HandPlayer {
      * @param b 
      * @return
      */
-    public void play(Board b) {
-        // TODO implement here
+    public void play(Board b,int rankCardPlayed, char colorPlayed) {
+        
        
     }
 
@@ -192,6 +193,42 @@ public class HandPlayer {
     	Board b=new Board();
     	b.
     })*/
+    
+    public static String readActionPlayer(){
+		System.out.println("Fichier que vous souhaiter voir?");
+		String s="";
+		try{
+	
+		InputStreamReader ise=new InputStreamReader(System.in);
+		BufferedReader be=new BufferedReader(ise);
+		s=be.readLine();
+	    
+		return s;
+		}catch(IOException e){
+			throw e;
+		}
+		return s;
+	}
+    
+    public static boolean choiceActionIsOk(String s) {
+    	int i,j;
+    	for (i=1;i<=5;i++) {
+    		if (s.equals("d : "+i))
+    			return true;
+    		for (j=1;j<=5;j++) {
+    			if (s.equals("p : "+ i + " " + j))
+    				return true;
+    		}
+    	}
+    	return false;    	
+    }
+    
+    public static boolean selectCardIsOk(String s) {
+    	if (!s.equals("1") || !s.equals("2") || !s.equals("3") || !s.equals("4") || !s.equals("5"))
+    		return false;
+    	return true;
+    }
+    
     public static void main(String[] args) {
     	ArrayList<Card> carte=new ArrayList<Card>();
     	carte.add(new Card(1,4));

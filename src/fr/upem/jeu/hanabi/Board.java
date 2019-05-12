@@ -156,13 +156,22 @@ public final class Board {
     void setDiscard(Discard d) {
     	this.graveyard=d;
     }
-    Card[] getBoard() {
-		return this.board;
-	}
-    
     Token getBankError() {
 		return this.bankError;
 	}
+    
+    public void setBankError(Token bankError) {
+		this.bankError = bankError;
+	}
+    
+    Deck getDeck() {
+		return deck;
+	}
+    
+    void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+    
     public String toString() {
     	String newLine=System.lineSeparator();
     	StringBuilder builder=new StringBuilder();
@@ -184,13 +193,14 @@ public final class Board {
        	builder.append("-----------------");
     	builder.append(newLine);
     	//Affiche le Board
-    	for(int i=0;i<this.board.length;i++) {
+    	/*for(int i=0;i<this.board.length;i++) {
     		//On affiche les Cartes
     		builder.append("J");
-    		builder.append(i);
+    		builder.append(i+1);
     		builder.append(" ");
     		
-    	}
+    	}*/
+    	builder.append("Board ");
     	builder.append(newLine);
     	for(int i=0;i<this.board.length;i++) {
     		//On affiche les Cartes
