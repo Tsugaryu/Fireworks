@@ -1,4 +1,5 @@
 package fr.upem.jeu.hanabi;
+//package fr.upem.jeu.hanabi;
 
 
 import java.util.*;
@@ -85,6 +86,17 @@ public final class Board {
      * @return true if the place of the card is correct .
      */
     public boolean putCard(Card c, int rank) {
+    	if (c.getValue()==1 && this.board[rank-1].getValue()==0) {
+    		//On vérifie que ce 1 n'a pas déjà été posé
+    		int i;
+    		for (i=0;i<this.board.length;i++) {
+    			if (i!=(rank-1)) {
+    				if (c.getColor()==this.board[i].getColor())
+    					return false;
+    			}
+    		}
+    		return true;
+    	}
         if(this.board[rank-1].getValue()==c.getValue()-1 && this.board[rank-1].getColor()==c.getColor()) {
         	this.board[rank-1]=c;
         	return true;
@@ -101,7 +113,7 @@ public final class Board {
     	this.board=new Card[5];
     	int i;
     	for (i=0;i<this.board.length;i++)
-    		this.board[i]=new Card(-1,-1);
+    		this.board[i]=new Card(0,-1);
     	this.graveyard=Discard.createDiscard();
     	this.gamerPlace=j;
     	this.deck=d;
@@ -117,12 +129,18 @@ public final class Board {
     	if(Board.singleton!=null)return Board.singleton;
     	//crÃ©er le Deck
     	Deck deck=Deck.createDeck();
+    	System.out.println(deck.getSizeDraw());
     	//crÃ©er les joueurs
     	ArrayList<HandPlayer> j=new ArrayList<HandPlayer>(numberGamer);
+    	for(int i=0;i<numberGamer;i++) {
+    		j.add(new HandPlayer(i+1,new ArrayList<Card>()));
+    	}
+    	System.out.println(j.size()+" et "+numberGamer);
     	Dialogue d=new Dialogue(numberGamer);
     	Board board=new Board(j , deck,d);
-    	deck.deal(board);
+    	board.deck.deal(board);
     	Board.singleton=board;
+    	System.out.println(board.deck.getSizeDraw());
         return board;
     }
     public void fireworksResult() {
@@ -186,13 +204,13 @@ public final class Board {
        	builder.append("-----------------");
     	builder.append(newLine);
        	//Affiche Token Erreur
-    	builder.append("Token rouge");
+    	builder.append("Token rouge ");
     	builder.append(this.bankError);
     	builder.append(newLine);
        	builder.append("-----------------");
     	builder.append(newLine);
     	//Affiche Token Controle
-    	builder.append("Token contrÃ´le");
+    	builder.append("Token controle");
     	builder.append(this.bankControl);
     	builder.append(newLine);
        	builder.append("-----------------");
@@ -218,9 +236,12 @@ public final class Board {
     	builder.append(newLine);
     	//Affiche la main des joueurs
     	//NOTE : ATTENTION LE JOUEUR ACTUEL DOIT VOIR SA MAIN DE MANIERE CACHEE
+    	int i=1;
     	for(HandPlayer hp : this.gamerPlace) {
+    		builder.append("Player " + i + "\n");
     		builder.append(hp);
     		builder.append(newLine);
+    		i++;
     	}
     	builder.append(newLine);
        	builder.append("-----------------");

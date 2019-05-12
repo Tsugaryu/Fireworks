@@ -33,12 +33,14 @@ public final class Deck {
     public void deal(Board board) {
     	ArrayList<HandPlayer> players=board.getGamerPlace();
     	int i,j;
-    	System.out.println(this.draw.size());
+    	Card card;
     	if(players.size()<=3) {
     		//make draw player
     		for(i=0;i<players.size();i++){
     			for(j=0;j<5;j++) {
-    				players.get(i).addCard(draw());
+    				card=this.draw();
+    				players.get(i).addCard(card);
+    				System.out.println(card);
     			}
     		}
     	}
@@ -52,7 +54,6 @@ public final class Deck {
     	}
     	//record the hand of the players
     	board.setGamerPlace(players);   
-    	System.out.println(this.draw.size());
     }
     public int getSizeDraw() {
     	return draw.size();
@@ -66,14 +67,13 @@ public final class Deck {
      * @return
      */
     public Card draw() {
-       Card drew=this.draw.pop();
+       Card drew=this.draw.removeFirst();
        
        return drew;
     }
 
     /*on ne met pas de javadoc*/   
     private Deck(LinkedList<Card> d) {
-    	super();
     	this.draw=d;
     }
     
@@ -115,10 +115,11 @@ public final class Deck {
         Deck.singleton=d;
         return d;
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
     	Deck d= Deck.createDeck();
     	Card c;
     	int un=0,deux=0,trois=0,quatre=0,cinq=0;
+    	System.out.println(d.getSizeDraw());
     	while(d.getSizeDraw()!=0) {
     		c= d.draw();
     		System.out.print(c+" ");
@@ -128,8 +129,9 @@ public final class Deck {
     		if(c.getValue()==4)quatre+=1;
     		if(c.getValue()==5)cinq+=1;
     	}
-    	System.out.println();
+    	System.out.println(System.lineSeparator());
     	System.out.println("Un="+un+"Deux="+deux+"trois="+trois+"quatre="+quatre+"cinq="+cinq);
-    }
+    	System.out.println(d.getSizeDraw());
+    }*/
 
 }

@@ -34,7 +34,7 @@ public class Card {
     @Override
     public String toString() {
         StringBuilder builder=new StringBuilder();
-        if (this.color==-1)
+        if (this.color==0)
         	return "";
         if(isWhite()) {
         	builder.append("W");

@@ -18,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Board b=Board.createBoard(2);
-        int i=1; // i correspond au numï¿½ro du joueur en train de jouer
+        int i=0; // i+1 correspond au numï¿½ro du joueur en train de jouer
         String read = new String ();
         Dialogue.printTutorial();
         int discardOrPlayDone; // discardOrPlayDone=0 signifie que le joueur n°i n'a pas encore fait discard ou play, et discardOrPlayDone=1 signifie que cela a été fait 
@@ -26,6 +26,7 @@ public class Main {
         	discardOrPlayDone=0;
         	System.out.println(b);
         	read=" "; // on initialise read pour qu'on puisse passer dans la boucle suivante
+        	System.out.println("Player " + (i+1));
         	while (!HandPlayer.choiceActionIsOk(read)) {
         		try {
         			read=HandPlayer.readActionPlayer();
@@ -62,7 +63,7 @@ public class Main {
         		discardOrPlayDone=1;
         	}
         	else { //si le premier caractere de read est p
-        		Card toPlay = hands.get(i).selectCard(rankCardToDo);
+        		Card toPlay = hands.get(i).discard(rankCardToDo);
         		int whereToPut=Integer.parseInt(String.valueOf(read.charAt(6)));
         		if (!(b.putCard(toPlay,whereToPut))) {
         			Token errors = b.getBankError();
@@ -72,18 +73,15 @@ public class Main {
         			b.setDiscard(graveyard);
         			
         		}
-        		else {
-        			hands.get(i).discard(toPlay);
-        		}
         		hands.get(i).addCard(card);
         		b.setGamerPlace(hands);
         		discardOrPlayDone=1;
         	}
         	if (discardOrPlayDone==1) { //on change de joueur si le joueur n°i a joué ou défaussé
-	        	if (i==1)
-	        		i=2;
-	        	else
+	        	if (i==0)
 	        		i=1;
+	        	else
+	        		i=0;
         	}
         }
         b.fireworksResult();

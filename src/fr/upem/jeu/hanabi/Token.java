@@ -49,7 +49,7 @@ public class Token {
      * @return "Token remaining : number of token"
      */
     public String toString() {
-        return ("Token remaining : " + this.number);
+        return (" remaining : " + this.number);
     }
 
     
