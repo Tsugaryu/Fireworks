@@ -21,9 +21,9 @@ public class Main {
         int i=0; // i+1 correspond au numï¿½ro du joueur en train de jouer
         String read = new String ();
         Dialogue.printTutorial();
-        int discardOrPlayDone; // discardOrPlayDone=0 signifie que le joueur n°i n'a pas encore fait discard ou play, et discardOrPlayDone=1 signifie que cela a été fait 
+       // int discardOrPlayDone; // discardOrPlayDone=0 signifie que le joueur n°i n'a pas encore fait discard ou play, et discardOrPlayDone=1 signifie que cela a été fait 
         while(!b.end()){
-        	discardOrPlayDone=0;
+        	//discardOrPlayDone=0;
         	System.out.println(b);
         	read=" "; // on initialise read pour qu'on puisse passer dans la boucle suivante
         	System.out.println("Player " + (i+1));
@@ -43,49 +43,47 @@ public class Main {
         		return ;
         	}
         	ArrayList<HandPlayer> hands=b.getGamerPlace();
-        	Deck d=b.getDeck();
-        	Card card=d.draw();
-        	Discard graveyard=b.getDiscard();
         	int rankCardToDo=Integer.parseInt(String.valueOf(read.charAt(4)));
-        	
         	if (read.charAt(0)=='s') {
         		int rankCard2=Integer.parseInt(String.valueOf(read.charAt(6)));
         		hands.get(i).swap(rankCardToDo, rankCard2);
         		b.setGamerPlace(hands);
         	}
-        	if(read.charAt(0)=='d'){
-        		Card discarded = hands.get(i).discard(rankCardToDo);
-        		hands.get(i).addCard(card);
-        		graveyard.addCard(discarded);
-        		b.setDeck(d);
-        		b.setGamerPlace(hands);
-        		b.setDiscard(graveyard);
-        		discardOrPlayDone=1;
-        	}
-        	else { //si le premier caractere de read est p
-        		Card toPlay = hands.get(i).discard(rankCardToDo);
-        		int whereToPut=Integer.parseInt(String.valueOf(read.charAt(6)));
-        		if (!(b.putCard(toPlay,whereToPut))) {
-        			Token errors = b.getBankError();
-        			errors.removeToken();
-        			b.setBankError(errors);
-        			graveyard.addCard(toPlay);
-        			b.setDiscard(graveyard);
-        			
-        		}
-        		hands.get(i).addCard(card);
-        		b.setGamerPlace(hands);
-        		discardOrPlayDone=1;
-        	}
-        	if (discardOrPlayDone==1) { //on change de joueur si le joueur n°i a joué ou défaussé
+  	
+        	else {
+        		Deck d=b.getDeck();
+            	Card card=d.draw();
+            	Discard graveyard=b.getDiscard();
+	        	if(read.charAt(0)=='d'){
+	        		Card discarded = hands.get(i).discard(rankCardToDo);
+	        		hands.get(i).addCard(card);
+	        		graveyard.addCard(discarded);
+	        		b.setDeck(d);
+	        		b.setGamerPlace(hands);
+	        		b.setDiscard(graveyard);
+	        		//discardOrPlayDone=1;
+	        	}
+	        	else { //si le premier caractere de read est p
+	        		Card toPlay = hands.get(i).discard(rankCardToDo);
+	        		int whereToPut=Integer.parseInt(String.valueOf(read.charAt(6)));
+	        		if (!(b.putCard(toPlay,whereToPut))) {
+	        			Token errors = b.getBankError();
+	        			errors.removeToken();
+	        			b.setBankError(errors);
+	        			graveyard.addCard(toPlay);
+	        			b.setDiscard(graveyard);
+	        			
+	        		}
+	        		hands.get(i).addCard(card);
+	        		b.setGamerPlace(hands);
+	        		//discardOrPlayDone=1;
+	        	}
 	        	if (i==0)
-	        		i=1;
-	        	else
-	        		i=0;
-        	}
+		        	i=1;
+		        else
+		        	i=0;
+	        }
         }
         b.fireworksResult();
     }
-
-
 }
