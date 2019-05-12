@@ -108,6 +108,8 @@ public class Dialogue {
     	System.out.println("-Play a card = p : [Place of CardID] [Place of BoardColor]");
     	System.out.println("-Discard a card = d : [Place of CardID]");
     	System.out.println("-Swap two cards = s :  [PlaceOfCardID1] [PlaceOfCardID2]");
+    	System.out.println("-Print the graveyard = a");
+    	System.out.println("-Leave the game = q");
     	System.out.println("Each color has a code which represent him in the dialogue");
     	/*System.out.println("W:White");
     	System.out.println("G:Green");

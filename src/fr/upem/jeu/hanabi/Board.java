@@ -5,7 +5,7 @@ package fr.upem.jeu.hanabi;
 import java.util.*;
 
 /**
- @author Axel Durand & Rapha�l BOURJOT
+ @author Axel Durand & Raphaï¿½l BOURJOT
  * @version 0.1
  * The Board class represents the board of the game.
  * This class is a Singleton.
@@ -71,7 +71,6 @@ public final class Board {
      */
     public boolean end() {
     	int end=0;
-    	System.out.println(this.board.length);
     	for(int i=0;i<this.board.length;i++) {
     		if(this.board[i].getValue()==5) {
     			end++;
@@ -84,27 +83,28 @@ public final class Board {
      * @param c a card in the hand of a player.
      * @param rank the place to put in.
      * @return true if the place of the card is correct .
-     */
-    public boolean putCard(Card c, int rank) {
-    	if (c.getValue()==1 && this.board[rank-1].getValue()==0) {
-    		//On v�rifie que ce 1 n'a pas d�j� �t� pos�
-    		int i;
-    		for (i=0;i<this.board.length;i++) {
-    			if (i!=(rank-1)) {
-    				if (c.getColor()==this.board[i].getColor())
-    					return false;
-    			}
-    		}
-    		return true;
-    	}
-        if(this.board[rank-1].getValue()==c.getValue()-1 && this.board[rank-1].getColor()==c.getColor()) {
-        	this.board[rank-1]=c;
-        	return true;
-        
-        }
-        return false;
-    }
+     */public boolean putCard(Card c, int rank) {
+         if (c.getValue()==1 && this.board[rank-1].getValue()==-1) {
+        	 System.out.println("VALUN ECU DE CHENE");
+        	 //On vérifie que ce 1 n'a pas déjà été posé
+             int i;
+             for (i=0;i<this.board.length;i++) {
+                 if (i!=(rank-1)) {
+                     if (c.getColor()==this.board[i].getColor())
+                         return false;
+                 }
+             }
+             this.board[rank-1]=c;
+             return true;
+         }
+         System.out.println("DADA");
+         if(this.board[rank-1].getValue()==c.getValue()-1 && this.board[rank-1].getColor()==c.getColor()) {
+             this.board[rank-1]=c;
+             return true;
 
+         }
+         return false;
+     }
     
     private  Board(ArrayList<HandPlayer> j, Deck d,Dialogue speak) {
      
@@ -113,7 +113,7 @@ public final class Board {
     	this.board=new Card[5];
     	int i;
     	for (i=0;i<this.board.length;i++)
-    		this.board[i]=new Card(0,-1);
+    		this.board[i]=new Card(-1,-1);
     	this.graveyard=Discard.createDiscard();
     	this.gamerPlace=j;
     	this.deck=d;
@@ -127,20 +127,17 @@ public final class Board {
      */
     public static Board createBoard(int numberGamer) {
     	if(Board.singleton!=null)return Board.singleton;
-    	//créer le Deck
+    	//crÃ©er le Deck
     	Deck deck=Deck.createDeck();
-    	System.out.println(deck.getSizeDraw());
-    	//créer les joueurs
+    	//crÃ©er les joueurs
     	ArrayList<HandPlayer> j=new ArrayList<HandPlayer>(numberGamer);
     	for(int i=0;i<numberGamer;i++) {
     		j.add(new HandPlayer(i+1,new ArrayList<Card>()));
     	}
-    	System.out.println(j.size()+" et "+numberGamer);
     	Dialogue d=new Dialogue(numberGamer);
     	Board board=new Board(j , deck,d);
     	board.deck.deal(board);
     	Board.singleton=board;
-    	System.out.println(board.deck.getSizeDraw());
         return board;
     }
     public void fireworksResult() {
@@ -161,15 +158,16 @@ public final class Board {
     		System.out.println("Murabito B : Yeah, maybe they will do something better in another time ?");
     	}
     	else if(res>15 && res<=20) {
-    		System.out.println("Murabito A : That was excellent !");
-    		System.out.println("Murabito B : ");	
+    		System.out.println("Murabito A : That was really good !");
+    		System.out.println("Murabito B : If it's not perfect, it's not good for me.");	
     	}
     	else if(res>20 && res<25) {
-    		
+    		System.out.println("Murabito A : The beautiful red ! !");
+    		System.out.println("Murabito B : We forgot the last one NOOOOOOOOOO");
     	}
     	else if(res==25) {
-    		System.out.println("Murabito A : ");
-    		System.out.println("Murabito B : ");
+    		System.out.println("Murabito A : It's a dream !");
+    		System.out.println("Murabito B : We are genius !");
     		System.out.println("The Innkeeper : GOOOOOLDEN LEGENDAAAARYYYYYYY");
     	}
     }
@@ -210,7 +208,7 @@ public final class Board {
        	builder.append("-----------------");
     	builder.append(newLine);
     	//Affiche Token Controle
-    	builder.append("Token controle");
+    	builder.append("Token controle ");
     	builder.append(this.bankControl);
     	builder.append(newLine);
        	builder.append("-----------------");
@@ -236,17 +234,14 @@ public final class Board {
     	builder.append(newLine);
     	//Affiche la main des joueurs
     	//NOTE : ATTENTION LE JOUEUR ACTUEL DOIT VOIR SA MAIN DE MANIERE CACHEE
-    	int i=1;
     	for(HandPlayer hp : this.gamerPlace) {
-    		builder.append("Player " + i + "\n");
     		builder.append(hp);
     		builder.append(newLine);
-    		i++;
     	}
-    	builder.append(newLine);
+    	//builder.append(newLine);
        	builder.append("-----------------");
     	builder.append(newLine);
-    	//on affichera la discard si l'utilisateur le demande --> on fera une fonction juste pour ça
+    	//on affichera la discard si l'utilisateur le demande --> on fera une fonction juste pour Ã§a
     	/*
     	builder.append(this.graveyard);
     	builder.append(newLine);

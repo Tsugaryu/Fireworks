@@ -5,7 +5,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * @author Raphael BOURJOT
+ * @author Axel DURAND
  */
 public class HandPlayer {
 
@@ -129,7 +129,6 @@ public class HandPlayer {
     	StringBuilder builder=new StringBuilder();
     	String newLine=System.lineSeparator();
     	builder.append("Hand of Player ");
-      	builder.append(newLine);
     	builder.append(this.idPlayer);
     	builder.append(newLine);
     	for(int i=0;i<this.hand.size();i++) {
@@ -209,7 +208,7 @@ public class HandPlayer {
     
     public static boolean choiceActionIsOk(String s) {
     	int i,j;
-    	if (s.equals("q"))
+    	if (s.equals("q") || s.equals("a"))
     		return true;
     	for (i=1;i<=5;i++) {
     		if (s.equals("d : "+i))
@@ -226,7 +225,7 @@ public class HandPlayer {
     
 
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
     	ArrayList<Card> carte=new ArrayList<Card>();
     	carte.add(new Card(1,4));
     	carte.add(new Card(2,3));
@@ -262,6 +261,6 @@ public class HandPlayer {
     	}
     
     	
-    }
+    }*/
 
 }

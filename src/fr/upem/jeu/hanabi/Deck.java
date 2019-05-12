@@ -40,7 +40,6 @@ public final class Deck {
     			for(j=0;j<5;j++) {
     				card=this.draw();
     				players.get(i).addCard(card);
-    				System.out.println(card);
     			}
     		}
     	}
