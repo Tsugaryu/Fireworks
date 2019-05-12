@@ -40,7 +40,7 @@ public class Discard {
      * @param d
      */
     private void Discard(List<Card> d) {
-    	super(); 
+    	 
     }
 
     /**
