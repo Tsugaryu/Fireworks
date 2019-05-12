@@ -48,17 +48,12 @@ public class Main {
         			b.setBankError(errors);
         			graveyard.addCard(toPlay);
         			b.setDiscard(graveyard);
-        			hands.get(i).addCard(c);
+        			
         		}
         		else {
-        			int j;
-        			for(j=1;j<=5;j++) {
-        				Card tmp=hands.get(i).selectCard(j);
-        				if (tmp.equals(toPlay))
-        					tmp=c;
-        			}
+        			hands.get(i).discard(toPlay);
         		}
-        		
+        		hands.get(i).addCard(c);
         		b.setGamerPlace(hands);
         	}
         	if (i==1)

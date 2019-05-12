@@ -39,8 +39,13 @@ public class Discard {
     /**
      * @param d
      */
+<<<<<<< HEAD
     private  Discard() {
     	this.discard=new LinkedList<Card>();
+=======
+    private void Discard(List<Card> d) {
+    	 
+>>>>>>> e8f8bf087e3fb457bd35863a7dcc6164dcb7f66c
     }
 
     /**
