@@ -39,8 +39,8 @@ public class Discard {
     /**
      * @param d
      */
-    private void Discard(List<Card> d) {
-    	super(); 
+    private  Discard() {
+    	this.discard=new LinkedList<Card>();
     }
 
     /**
@@ -62,7 +62,8 @@ public class Discard {
     }
     /*ajoute une carte à la défausse*/
     public void addCard(Card d) {
-    	this.discard.addLast(d);
+    	this.discard.addFirst(d);
+    	this.top=d;
     }
 
 }

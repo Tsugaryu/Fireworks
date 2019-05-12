@@ -194,7 +194,7 @@ public class HandPlayer {
     	b.
     })*/
     
-    public static String readActionPlayer(){
+    public static String readActionPlayer() throws IOException{
 		System.out.println("Fichier que vous souhaiter voir?");
 		String s="";
 		try{
@@ -207,7 +207,7 @@ public class HandPlayer {
 		}catch(IOException e){
 			throw e;
 		}
-		return s;
+		
 	}
     
     public static boolean choiceActionIsOk(String s) {

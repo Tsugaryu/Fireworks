@@ -83,10 +83,10 @@ public class Dialogue {
      * @param dialogue 
      * @return
      */
-    public void recordDialogue(int gamer, void dialogue) {
+    /*public void recordDialogue(int gamer, void dialogue) {
         // TODO implement here
         return null;
-    }
+    }*/
 
     /**
      * @param s 

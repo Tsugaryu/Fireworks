@@ -4,7 +4,7 @@
 import java.util.*;
 
 /**
- @author Axel Durand & Raphaël BOURJOT
+ @author Axel Durand & Raphaï¿½l BOURJOT
  * @version 0.1
  * The Board class represents the board of the game.
  * This class is a Singleton.
@@ -84,8 +84,8 @@ public final class Board {
      * @return true if the place of the card is correct .
      */
     public boolean putCard(Card c, int rank) {
-        if(this.board[rank].getValue()==c.getValue()-1 && this.board[rank].getColor()==c.getColor()) {
-        	this.board[rank]=c;
+        if(this.board[rank-1].getValue()==c.getValue()-1 && this.board[rank-1].getColor()==c.getColor()) {
+        	this.board[rank-1]=c;
         	return true;
         
         }
@@ -98,7 +98,7 @@ public final class Board {
     	this.bankError=new Token(3);
     	this.bankControl=new Token(8);
     	this.board=new Card[5];
-    	this.graveyard=new Discard();
+    	this.graveyard=Discard.createDiscard();
     	this.gamerPlace=j;
     	this.deck=d;
     	this.speakingInterface=speak;
@@ -118,6 +118,7 @@ public final class Board {
     	Dialogue d=new Dialogue(numberGamer);
     	Board board=new Board(j , deck,d);
     	deck.deal(board);
+    	Board.singleton=board;
         return board;
     }
     public void fireworksResult() {
@@ -160,7 +161,7 @@ public final class Board {
 		return this.bankError;
 	}
     
-    public void setBankError(Token bankError) {
+    void setBankError(Token bankError) {
 		this.bankError = bankError;
 	}
     
@@ -193,14 +194,16 @@ public final class Board {
        	builder.append("-----------------");
     	builder.append(newLine);
     	//Affiche le Board
-    	/*for(int i=0;i<this.board.length;i++) {
+    	builder.append("Board ");
+    	builder.append(newLine);
+    	for(int i=0;i<this.board.length;i++) {
     		//On affiche les Cartes
-    		builder.append("J");
+    		
     		builder.append(i+1);
     		builder.append(" ");
     		
-    	}*/
-    	builder.append("Board ");
+    	}
+    	
     	builder.append(newLine);
     	for(int i=0;i<this.board.length;i++) {
     		//On affiche les Cartes
@@ -219,10 +222,12 @@ public final class Board {
        	builder.append("-----------------");
     	builder.append(newLine);
     	//on affichera la discard si l'utilisateur le demande --> on fera une fonction juste pour Ã§a
+    	/*
     	builder.append(this.graveyard);
     	builder.append(newLine);
        	builder.append("-----------------");
     	builder.append(newLine);
+    	*/
     	return builder.toString();
     }
 }

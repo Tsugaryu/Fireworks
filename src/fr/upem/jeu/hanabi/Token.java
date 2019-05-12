@@ -1,8 +1,6 @@
 //package fr.upem.jeu.hanabi;
 
 
-import java.util.*;
-
 /**@author : Raphael BOURJOT
  * @version 0.1
  * A variable of this class represents the stack of token remaining.
@@ -11,8 +9,6 @@ import java.util.*;
  * @throws an IllegalArgumentException when you intent to use addToken on a Token variable which have number equal to max
  */
 public class Token {
-
-
 
     /**
      * Token.number is the number of token remaining
