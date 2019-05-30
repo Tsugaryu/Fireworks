@@ -12,12 +12,12 @@ public class HandPlayer {
  
 
     /**
-     * 
+     * Hand of the player
      */
     private ArrayList<Card> hand;
 
     /**
-     * 
+     * Id of a player
      */
     private int idPlayer;
 
@@ -29,11 +29,11 @@ public class HandPlayer {
 
 
     /**
-     * @param c 
-     * @param graveyard 
-     * @return
+     * @param c Cards to discard 
+     * @return  
      */
     public Card discard(Card c) {
+    	
         Card discarded=new Card(0,0);
         int i=0;
         for(Card card : this.hand) {

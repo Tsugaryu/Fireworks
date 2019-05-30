@@ -28,9 +28,13 @@ public class Dialogue {
      * @param s 
      * @return
      */
-    public boolean isFormatCorrect(String s) {
+    public static boolean isFormatCorrect(String s) {
         // TODO implement here
-        return Pattern.matches("[ipds]\\s[:]\\s[1-5]\\s[1-5]\\s[1-5WGYRB]", s) ;
+    	 Pattern pattern;
+    	 Matcher matcher;
+    	 pattern = Pattern.compile("([ips]\\s[:]\\s[1-5]\\s[1-5WGYRB])|([d]\\s[:]\\s[1-5])");//rajouter la fin du motif de répétition
+         matcher = pattern.matcher(s);
+        return matcher.find() ;
     }
 
     /**
@@ -100,9 +104,9 @@ public class Dialogue {
      * Print the tutorial of the game.
      */
     public static void printTutorial() {
-    	//System.out.println("In order to play to Hanabi with the command line,");
-    	//System.out.println("A mean for communicate with each player has been set by the developers");
-    	//System.out.println("This tutorial will show you the different command you can  use :");
+    	System.out.println("In order to play to Hanabi with the command line,");
+    	System.out.println("A mean for communicate with each player has been set by the developers");
+    	System.out.println("This tutorial will show you the different command you can  use :");
     	System.out.println("-Give an intel = i : [PlayerID] [Place of CardIDToGiveIntel] [Value or Color] ; {Other cards which have SAME value or SAME color}");
     	System.out.println("WARNING : if you give more of one information and don't do it for ALL of the cards of a player. The game will precise it to this player.");
     	System.out.println("-Play a card = p : [Place of CardID] [Place of BoardColor]");
@@ -111,12 +115,18 @@ public class Dialogue {
     	System.out.println("-Print the graveyard = a");
     	System.out.println("-Leave the game = q");
     	System.out.println("Each color has a code which represent him in the dialogue");
-    	/*System.out.println("W:White");
+    	System.out.println("W:White");
     	System.out.println("G:Green");
     	System.out.println("Y:Yellow");
     	System.out.println("R:Red");
-    	System.out.println("B:Blue");*/
+    	System.out.println("B:Blue");
         return ;
     }
+    public static void main(String[] args) {
+		String testCorrect="s : 1 5";
+		String testFaux ="s : 1  5";
+		System.out.println(Dialogue.isFormatCorrect(testCorrect));
+		System.out.println(Dialogue.isFormatCorrect(testFaux));
+	}
 
 }

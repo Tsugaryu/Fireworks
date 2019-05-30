@@ -32,8 +32,9 @@ public class Token {
 
     /**
      * remove 1 to the token.number
+     * @throws IllegalArgumentException
      */
-    public void removeToken() {
+    public void removeToken()throws IllegalArgumentException {
     	if (isEmpty())throw new IllegalArgumentException("You can't have less token than zero!");
         this.number-=1;
     }
@@ -63,8 +64,9 @@ public class Token {
 
     /**
      * add 1 to the token.number
+     * @throws IllegalArgumentException
      */
-    public void addToken() {
+    public void addToken()throws IllegalArgumentException {
     	if (this.number==this.maxToken)
     		throw new IllegalArgumentException("You can't have more tokens than the max !");
         this.number+=1;

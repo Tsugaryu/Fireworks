@@ -20,12 +20,6 @@ public class Card {
     
     private final int value;
 
-    /*
-     * Id of a card used for mix a Deck.
-     * @since 0.1 ;
-     */
-    /*private final int id;*/
-
  
     /**
      * convert a Card in a string
@@ -50,6 +44,9 @@ public class Card {
         }
         else if(isBlue()) {
         	builder.append("B");
+        }
+        else {
+        	builder.append("_");
         }
         builder.append(this.value);
         return builder.toString();
@@ -76,10 +73,13 @@ public class Card {
      * 	Value of the card
      * @param id
      * 	Id of the card
+     * @throw {@link IllegalArgumentException} when value >5 or color > 6.
      * @since 0.1 ;
      */
-    public Card(int color, int value/*, int id*/) {
-    	if(color>5||value>5);//lancez une exception
+    public Card(int color, int value/*, int id*/)throws IllegalArgumentException {
+    	if(color>6||value>5) {
+    		throw new IllegalArgumentException("Il n'est pas possible d'avoir plus de 6 types de cartes de valeur supérieur à 5");
+    	}
     	this.color=color;
         this.value=value;
         /*this.id=id;*/
@@ -129,9 +129,17 @@ public class Card {
     public boolean isBlue() {
            return this.color==4;
     }
+    /**
+     * getter of @see color
+     * @return
+     */
     int getColor() {
     	return this.color;
     }
+    /**
+     * getter of @see value	
+     * @return
+     */
     int getValue() {
     	return this.value;
     }
