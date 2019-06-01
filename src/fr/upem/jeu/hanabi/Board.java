@@ -43,13 +43,26 @@ public final class Board {
      */
     private Discard graveyard;
 
-    private Dialogue speakingInterface;
+   
     /**
      * 
      */
     private static volatile Board singleton=null;
-
-
+    /**
+     * 
+     */
+     
+    private int turn;
+    
+    Token getControlBank() {
+    	return this.bankControl;
+    }
+    void setControlBank(Token tok) {
+    	this.bankControl=tok;
+    }
+    void setTurn(int tour){
+    		this.turn=tour;
+    	}
     /**
      * Update gamers hand.
      * @param gamers hand of the player
@@ -106,7 +119,7 @@ public final class Board {
          return false;
      }
     
-    private  Board(ArrayList<HandPlayer> j, Deck d,Dialogue speak) {
+    private  Board(ArrayList<HandPlayer> j, Deck d) {
      
     	this.bankError=new Token(3);
     	this.bankControl=new Token(8);
@@ -117,7 +130,7 @@ public final class Board {
     	this.graveyard=Discard.createDiscard();
     	this.gamerPlace=j;
     	this.deck=d;
-    	this.speakingInterface=speak;
+    	
     }
 
     /**
@@ -127,15 +140,15 @@ public final class Board {
      */
     public static Board createBoard(int numberGamer) {
     	if(Board.singleton!=null)return Board.singleton;
-    	//crÃ©er le Deck
+    	//creer le Deck
     	Deck deck=Deck.createDeck();
-    	//crÃ©er les joueurs
+    	//creer les joueurs
     	ArrayList<HandPlayer> j=new ArrayList<HandPlayer>(numberGamer);
     	for(int i=0;i<numberGamer;i++) {
     		j.add(new HandPlayer(i+1,new ArrayList<Card>()));
     	}
-    	Dialogue d=new Dialogue(numberGamer);
-    	Board board=new Board(j , deck,d);
+    	
+    	Board board=new Board(j , deck);
     	board.deck.deal(board);
     	Board.singleton=board;
         return board;
@@ -167,7 +180,7 @@ public final class Board {
     	}
     	else if(res==25) {
     		System.out.println("Murabito A : It's a dream !");
-    		System.out.println("Murabito B : We are genius !");
+    		System.out.println("Murabito B : They are genius !");
     		System.out.println("The Innkeeper : GOOOOOLDEN LEGENDAAAARYYYYYYY");
     	}
     }
@@ -234,9 +247,15 @@ public final class Board {
     	builder.append(newLine);
     	//Affiche la main des joueurs
     	//NOTE : ATTENTION LE JOUEUR ACTUEL DOIT VOIR SA MAIN DE MANIERE CACHEE
+    	int i=0;
     	for(HandPlayer hp : this.gamerPlace) {
-    		builder.append(hp);
+    		if(i==this.turn) {
+    			builder.append(hp.showHidden());
+    		}
+    		else
+    			builder.append(hp);
     		builder.append(newLine);
+    		i++;
     	}
     	//builder.append(newLine);
        	builder.append("-----------------");

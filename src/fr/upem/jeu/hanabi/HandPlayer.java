@@ -25,9 +25,15 @@ public class HandPlayer {
     /**
      * 
      */
-    private Dialogue effectue;
+    private Dialogue memoire;
 
-
+    Dialogue getMemory(){
+    	return this.memoire;
+    }
+    void setMemory(Dialogue d) {
+    	this.memoire=d;
+    	
+    }
     /**
      * @param c Cards to discard 
      * @return  
@@ -112,6 +118,7 @@ public class HandPlayer {
     	String newLine=System.lineSeparator();
     	builder.append("Hand of Player ");
     	builder.append(this.idPlayer);
+    	builder.append(newLine);
     	for(int i=0;i<this.hand.size();i++) {
     		builder.append(i+1);
     		builder.append(" ");
@@ -177,6 +184,7 @@ public class HandPlayer {
     public HandPlayer(int id, ArrayList<Card> hand) {
        this.idPlayer=id;
        this.hand=hand;
+       this.memoire=new Dialogue();
     }
     /*
      * Le joueur décide de l'action à réaliser, 
