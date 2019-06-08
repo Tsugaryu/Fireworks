@@ -100,7 +100,7 @@ public final class Parameter {
 		int maxPlayer;
 	    int numberOfCardByPlayer;
 	    String[] colorWithIt;
-	    int[]  numverOfValueAvailableByFamily;
+	    int[]  numberOfValueAvailableByFamily;
 		Parameter param ;
 		 Pattern p = Pattern.compile("-");
 		Scanner scan=new Scanner(System.in);
@@ -127,13 +127,13 @@ public final class Parameter {
 			res=scan.nextLine();	
 		}
 		String[] numberCard=p.split(res);
-        numverOfValueAvailableByFamily=new int[numberCard.length];
+        numberOfValueAvailableByFamily=new int[numberCard.length];
         for(int i=0;i<numberCard.length;i++) {
         	 int left=Integer.parseInt(""+numberCard[i].charAt(0))-1;
        	  int right=Integer.parseInt(""+numberCard[i].charAt(2));
-            numverOfValueAvailableByFamily[left]=right;
+            numberOfValueAvailableByFamily[left]=right;
         }
-		 param=new Parameter(maxPlayer, numberOfCardByPlayer, colorWithIt, numverOfValueAvailableByFamily);
+		 param=new Parameter(maxPlayer, numberOfCardByPlayer, colorWithIt, numberOfValueAvailableByFamily);
          //scan.close();
          if(!param.isParameterFileCorrect()) {
         	System.out.println("Data that you have entered cannot create a good game. Loading of default data");
@@ -141,7 +141,7 @@ public final class Parameter {
          }
          else {
         	 try {
-        	   FileOutputStream fis=new FileOutputStream("parameters/parameter.txt");
+        	   FileOutputStream fis=new FileOutputStream("src/parameters/parameter.txt");
   	    	   OutputStreamWriter isr=new OutputStreamWriter(fis);
   	           BufferedWriter br = new BufferedWriter(isr);
   	           String newLine=System.lineSeparator();
@@ -156,9 +156,9 @@ public final class Parameter {
   	           }
   	           br.write(newLine);
   	           br.write("NumberCardByColor : ");
-  	         for(int i=0;i<numverOfValueAvailableByFamily.length;i++) {
-  	        	 br.write((i+1)+"="+numverOfValueAvailableByFamily[i]);
-  	        	 if(i!=numverOfValueAvailableByFamily.length-1)br.write("-");
+  	         for(int i=0;i<numberOfValueAvailableByFamily.length;i++) {
+  	        	 br.write((i+1)+"="+numberOfValueAvailableByFamily[i]);
+  	        	 if(i!=numberOfValueAvailableByFamily.length-1)br.write("-");
   	         }
   	        	 br.write(newLine);
   	        	 br.close();
@@ -186,12 +186,12 @@ public final class Parameter {
 	       int maxPlayer;
 	        int numberOfCardByPlayer;
 	       String[] colorWithIt;
-	       int[]  numverOfValueAvailableByFamily;
-	       File f=new File("parameters/parameter.txt");
+	       int[]  numberOfValueAvailableByFamily;
+	       File f=new File("src/parameters/parameter.txt");
     	   System.out.println(f.getCanonicalPath());
     	   System.out.println(f.canRead());
 	       try {
-	    	   FileInputStream fis=new FileInputStream("parameters/parameter.txt");
+	    	   FileInputStream fis=new FileInputStream("src/parameters/parameter.txt");
 	    	  
 	    	   InputStreamReader isr=new InputStreamReader(fis);
 	           BufferedReader br = new BufferedReader(isr);
@@ -206,13 +206,13 @@ public final class Parameter {
 	           reader=br.readLine();
 	           reader=reader.substring(20);
 	           String[] numberCard=p.split(reader);
-	           numverOfValueAvailableByFamily=new int[numberCard.length];
+	           numberOfValueAvailableByFamily=new int[numberCard.length];
 	           for(int i=0;i<numberCard.length;i++) {
 	        	  int left=Integer.parseInt(""+numberCard[i].charAt(0))-1;
 	        	  int right=Integer.parseInt(""+numberCard[i].charAt(2));
-	             numverOfValueAvailableByFamily[left]=right;
+	             numberOfValueAvailableByFamily[left]=right;
 	           }
-	           param=new Parameter(maxPlayer, numberOfCardByPlayer, colorWithIt, numverOfValueAvailableByFamily);
+	           param=new Parameter(maxPlayer, numberOfCardByPlayer, colorWithIt, numberOfValueAvailableByFamily);
 	           br.close();
 	           isr.close();
 	           fis.close();
@@ -222,7 +222,7 @@ public final class Parameter {
 	         param=Parameter.loadDefaultParameter();
 	       }
 
-	/*}*/ Parameter.singleton=param;
+	    Parameter.singleton=param;
 	    return  param;		
 	}
 	private String[] upperCase(String[] words) {
@@ -247,13 +247,13 @@ public final class Parameter {
 	      colorWithIt[2]="RED";
 	      colorWithIt[3]="YELLOW";
 	      colorWithIt[4]="WHITE";
-	      int[]  numverOfValueAvailableByFamily=new int[5];
-	      numverOfValueAvailableByFamily[0]=3;
-	      numverOfValueAvailableByFamily[1]=2;
-	      numverOfValueAvailableByFamily[2]=2;
-	      numverOfValueAvailableByFamily[3]=2;
-	      numverOfValueAvailableByFamily[4]=1;
-	      param=new Parameter(maxPlayer, numberOfCardByPlayer, colorWithIt, numverOfValueAvailableByFamily);
+	      int[]  numberOfValueAvailableByFamily=new int[5];
+	      numberOfValueAvailableByFamily[0]=3;
+	      numberOfValueAvailableByFamily[1]=2;
+	      numberOfValueAvailableByFamily[2]=2;
+	      numberOfValueAvailableByFamily[3]=2;
+	      numberOfValueAvailableByFamily[4]=1;
+	      param=new Parameter(maxPlayer, numberOfCardByPlayer, colorWithIt, numberOfValueAvailableByFamily);
 	      Parameter.singleton=param;
 	      return param;
 	}

@@ -150,7 +150,7 @@ public class Dialogue {
     		 letterPattern+=a.charAt(0);
     	 }
     	 
-    	 pattern = Pattern.compile("([ps]\\s[:]\\s[1-"+maxValue+"]\\s[1-"+maxValue+"])|([d]\\s[:]\\s[1-"+maxValue+"])|([i]\\s[:]\\s[1-"+maxValue+"]\\s[1-"+maxValue+"]\\s[1-"+maxValue+letterPattern+"])");//rajouter la fin du motif de répétition
+    	 pattern = Pattern.compile("([aq])|([ps]\\s[:]\\s[1-"+maxValue+"]\\s[1-"+maxValue+"])|([d]\\s[:]\\s[1-"+maxValue+"])|([i]\\s[:]\\s[1-"+maxValue+"]\\s[1-"+maxValue+"]\\s[1-"+maxValue+letterPattern+"])");//rajouter la fin du motif de répétition
          matcher = pattern.matcher(format);
         return matcher.find() ;
     }

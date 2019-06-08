@@ -90,16 +90,15 @@ public class Main {
             }
           }
           System.out.println("String rentree "+read);
-          if (read.charAt(0)=='q') {
+          /*if (read.charAt(0)=='q') {
             System.out.println("Goodbye");
             return ;
-          }
+          }*/
           
           int rankCardToDo=Integer.parseInt(String.valueOf(read.charAt(4)));
           d=board.getDeck();
           graveyard=board.getDiscard();
           /*Déterminer l'action*/
-          
           switch(read.charAt(0)) {
             case 's':
             int rankCardSecondAction=Integer.parseInt(String.valueOf(read.charAt(6)));
@@ -110,6 +109,10 @@ public class Main {
             case 'a':
             System.out.println(board.getDiscard());
             break;
+            case 'q':
+            System.out.println("Goodbye");
+            board.fireworksResult();
+            return ;
             case 'd':
             card=d.draw();
             discarded = hands.get(i).discard(rankCardToDo);
