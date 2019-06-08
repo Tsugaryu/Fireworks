@@ -1,0 +1,1 @@
+package fr.upem.jeu.hanabi.main;

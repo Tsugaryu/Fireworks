@@ -1,0 +1,4 @@
+Max Player = 7
+Card Number = 6
+Color are : WHITE-BLUE-RED-YELLOW-PINK-CHROME
+NumberCardByColor : 1=3-2=4-3=2-4=3-5=1

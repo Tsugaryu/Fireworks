@@ -1,15 +1,16 @@
-package fr.upem.jeu.hanabi;
-
-//[ipds]\s[:]\s[1-5]\s[1-5]\s[1-5WGYRB]
+package fr.upem.jeu.hanabi.io;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 /**
- * 
+ * 	Class which permits to player to dialog witch each of the them through the system.
+ * Contains also the memory of one player.
+ *@author Axel DURAND
+ *@version 1.0
  */
 public class Dialogue {
     /**
-     * 
+     * Actual Memory of a gamer.
      */
     private StringBuilder shortMemoryGamer;
     
@@ -17,14 +18,26 @@ public class Dialogue {
      * ajoute information donné par un joueur chaque info est séparé par un ;  et est concaténé dans un builder
      *On traite l'information sans le souci de l'action et du joueur à laquelle est destiné à l'intérieur de la méthode
      * */
+  /**
+   * Add information which are given by another player.
+   * @param newInfo new information to memorize.  
+   * */
   public void addMemory(String newInfo) {
     		this.shortMemoryGamer.append(newInfo.substring(6));
-    		this.shortMemoryGamer.append(" /");	
+    		this.shortMemoryGamer.append(" /");	// char which separe each information
   }
+  /**
+   * Constructor of Dialogue.
+   * */
   public Dialogue() {
 	  this.shortMemoryGamer=new StringBuilder();
 	  this.shortMemoryGamer.append("");
   }
+  /**
+   * Give to the player all informations he got from the others.
+   * @return
+   * The information in human speaking
+   * */
   @Override
   public String toString() {
 	  
@@ -58,18 +71,19 @@ public class Dialogue {
   		 Pattern p = Pattern.compile("; ");
   		 return p.split(s);
   	}
+  	/**
+  	 * Erase the @see shortMemoryGamer contents
+  	 * */
     public void forget(){
     	System.out.println(this.shortMemoryGamer.toString());
     	if(this.shortMemoryGamer.toString()=="")return;
     	this.shortMemoryGamer.delete(0,this.shortMemoryGamer.toString().length());
     }
-    /*
-     * Vérifie qu'une information soit correctement groupé (qu on ne puisse pas dire card 1=blue card 2 =1 par exemple 
-     * et qu'on oublie pas certain caractère*/
+   
      /**
-      * Identifie si un groupe est correct
-      * @param s
-      * @return true si est en fasse d'un groupe correct
+      * Identify if a group of information is correct
+      * @param s which contain at least a group of information
+      * @return true if we got a correct group
       */
     public static boolean isInformationGroupCorrect(String s) {
     	char correctGroup=s.charAt(8);
@@ -82,9 +96,9 @@ public class Dialogue {
     	return matcher.find();
     }
     /**
-     * Identifie si l'information est groupée, sinon cela sgnifie que nous avons affaire à une info unique 
-     * @param s
-     * @return
+     * Identify if the information is grouped  
+     * @param s String which contain at least one information
+     * @return true if information is grouped . False if information is 'alone'.
      */
     public static boolean isInformationGroup(String s) {
     	Pattern pattern;
@@ -94,30 +108,55 @@ public class Dialogue {
     	return matcher.find();
     }
     /**
-     * @param s 
-     * @return
+     * Check if the color format in the parameter file is correct
+     * @param format 
+     * format which need to be checked.
+     * @return true if the format is correct
+     * */
+    public static boolean isColorFormatCorrect(String format) {
+    	Pattern pat;
+		Matcher match;
+		 pat = Pattern.compile("(\\w*-)+");
+         match = pat.matcher(format);
+        return match.find() ;
+    }
+    /**
+     * Check if the family number of card format in the parameter file is correct
+     * @param format 
+     *format which need to be checked.
+     * @return true if the format is correct
+     * */
+    public static boolean isFamilyNumberFormatCorrect(String format) {
+    	Pattern pat;
+		Matcher match;
+		 pat = Pattern.compile("(([1-9])|([1-9](\\d+))=\\d-)+");
+         match = pat.matcher(format);
+        return match.find() ;
+    }
+    /**
+     * Check if the action given by a player are wrote in the correct format.
+     * @param format to check
+     * @return true if the format is correct.
      */
-    public static boolean isFormatCorrect(String s) {
+    public static boolean isFormatCorrect(String format) {
         // TODO implement here
     	 Pattern pattern;
     	 Matcher matcher;
-    	 pattern = Pattern.compile("([ps]\\s[:]\\s[1-5]\\s[1-5])|([d]\\s[:]\\s[1-5])|([i]\\s[:]\\s[1-5]\\s[1-5]\\s[1-5WGYRB])");//rajouter la fin du motif de répétition
-         matcher = pattern.matcher(s);
+    	 Parameter param=Parameter.getInstance();
+    	 int maxValue=param.getNumberOfValueAvailableByFamily().length;
+    	 String[] forPattern=param.getColorFamily();
+    	 String letterPattern="";
+    	 for(String a : forPattern) {
+    		 letterPattern+=a.charAt(0);
+    	 }
+    	 
+    	 pattern = Pattern.compile("([ps]\\s[:]\\s[1-"+maxValue+"]\\s[1-"+maxValue+"])|([d]\\s[:]\\s[1-"+maxValue+"])|([i]\\s[:]\\s[1-"+maxValue+"]\\s[1-"+maxValue+"]\\s[1-"+maxValue+letterPattern+"])");//rajouter la fin du motif de répétition
+         matcher = pattern.matcher(format);
         return matcher.find() ;
     }
-
     /**
-     * @param gamer 
-     * @return
-     */
-  //  public String sendDialogueToPlayer(int gamer) {
-        // TODO implement here
-    //    return "";
-    //}
-
-    /**
-     * @param builder 
-     * @return
+     * @param s the string containing the information
+     * @return a string which format is :Card PlaceId value is Value or Color.
      */
     private String convertToSpeak(String s) {
     	if(s.length()==0)return "";
@@ -125,26 +164,22 @@ public class Dialogue {
     	toSay.append("Card ");
 		 toSay.append(s.charAt(0));
 		 toSay.append(" value is ");
-		 System.out.println(s);
-    	switch(""+s.charAt(2)) {
-    	 case "W":
-             toSay.append("White");
-             break;
-           case "G":
-             toSay.append("Green");
-             break;
-           case "Y":
-             toSay.append("Yellow");
-             break;
-           case "R":
-             toSay.append("Red");
-             break;
-           case "B":
-             toSay.append("Blue");
-             break;
-           default:
-        	   toSay.append(s.charAt(2));    
-      }
+		 //System.out.println(s);
+		 Parameter param=Parameter.getInstance();
+		 String[] color=param.getColorFamily();
+		 /*for(String a : color) {
+			 System.out.println(a);
+		 }*/
+		 for(int i=0;i<color.length;i++) {
+			 if(color[i].charAt(0)==s.charAt(2)) {
+				 System.out.println("les valeurs sont égales");
+				 toSay.append(color[i]);
+				 break;
+			 }
+			 else if(i==color.length-1) {
+				 toSay.append(s.charAt(2));    
+			 }
+		 }
     	return toSay.toString();
     }
 
@@ -162,7 +197,7 @@ public class Dialogue {
     	System.out.println("-Swap two cards = s :  [PlaceOfCardID1] [PlaceOfCardID2]");
     	System.out.println("-Print the graveyard = a");
     	System.out.println("-Leave the game = q");
-    	System.out.println("Each color has a code which represent him in the dialogue");
+    	System.out.println("Each color has a code which represent him in the dialogue, this the first letter of his color. Example :");
     	System.out.println("W:White");
     	System.out.println("G:Green");
     	System.out.println("Y:Yellow");
@@ -170,6 +205,8 @@ public class Dialogue {
     	System.out.println("B:Blue");
         return ;
     }
+    /*
+    //Main de test
     public static void main(String[] args) {
 		String testCorrect="s : 1 5";
 		String testFaux ="s : 1  5";
@@ -192,7 +229,12 @@ public class Dialogue {
 		d.forget();
 		System.out.println("lal "+d);
 		d.forget();
+		String colorCheck="White-Blue-Red-Yellow-Green-Chrome";
+		String FamilyChecking="1=3-2=2-3=2-4=2-5=1";
+		System.out.println("t "+Dialogue.isColorFormatCorrect(colorCheck));
+		System.out.println("u "+Dialogue.isFamilyNumberFormatCorrect(FamilyChecking));
     
     }
+    */
 
 }

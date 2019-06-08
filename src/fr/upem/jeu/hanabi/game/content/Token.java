@@ -1,12 +1,12 @@
-package fr.upem.jeu.hanabi;
+package fr.upem.jeu.hanabi.game.content;
 
 
 /**@author : Raphael BOURJOT
- * @version 0.1
+ * @version 1.0
  * A variable of this class represents the stack of token remaining.
  * The stack can contain control tokens or error tokens.
  * 
- * @throws an IllegalArgumentException when you intent to use addToken on a Token variable which have number equal to max
+ *
  */
 public class Token {
 
@@ -23,8 +23,10 @@ public class Token {
     /**
      * @param max
      * Create a new variable Token. Initialize maxToken and number to max.
-     */
+     * @throws IllegalArgumentException  when you try to create token which have a negative or empty value. 
+     *      */
     public Token(int max) {
+    	if(max<=0)   throw new IllegalArgumentException("Token cannot be empty or negative at his creation");
         this.maxToken=max;
         this.number=max;
     }
@@ -32,14 +34,15 @@ public class Token {
 
     /**
      * remove 1 to the token.number
-     * @throws IllegalArgumentException
+     * @throws IllegalStateException when you try to remove a token when the stack is empty.
      */
-    public void removeToken()throws IllegalArgumentException {
-    	if (isEmpty())throw new IllegalArgumentException("You can't have less token than zero!");
+    public void removeToken()throws IllegalStateException {
+    	if (isEmpty())throw new IllegalStateException("You can't have less token than zero!");
         this.number-=1;
     }
 
     /**
+     * Check if the token stack is empty
      * @return true if there is no token remaining; or false if there is at least one token.
      */
     public boolean isEmpty() {
@@ -49,6 +52,7 @@ public class Token {
     /**
      * @return "Token remaining : number of token"
      */
+    @Override
     public String toString() {
         return ("remaining : " + this.number);
     }
@@ -56,6 +60,7 @@ public class Token {
     
 
     /**
+     * Check if the token stack is full.
      * @return a boolean. If the number of token is equal to the max, the method return true. Else, it return false.
      */
     public boolean isLimit() {
@@ -64,13 +69,14 @@ public class Token {
 
     /**
      * add 1 to the token.number
-     * @throws IllegalArgumentException
+     * @throws IllegalStateException when you try to add a token when the stack is full.
      */
-    public void addToken()throws IllegalArgumentException {
+    public void addToken()throws IllegalStateException {
     	if (this.number==this.maxToken)
-    		throw new IllegalArgumentException("You can't have more tokens than the max !");
+    		throw new IllegalStateException("You can't have more tokens than the max !");
         this.number+=1;
-    }
+    }/*
+    //MAIN DE TEST
     public static void main(String[] args) {
     	Token t1=new Token(1);
     	Token t2=new Token(5);
@@ -89,6 +95,7 @@ public class Token {
     	t2.addToken();
     	
     }
+    */
     
     int getNumber() {
 		return this.number;
