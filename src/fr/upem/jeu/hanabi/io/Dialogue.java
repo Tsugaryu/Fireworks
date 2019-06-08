@@ -90,8 +90,10 @@ public class Dialogue {
     	String comparante=s.substring(8);
     	Pattern pattern;
    	 	Matcher matcher;
-   	 	System.out.println(correctGroup);
-   	 	pattern = Pattern.compile("(([1-5]\\s["+correctGroup+"])(\\s[;]\\s[1-5]\\s["+correctGroup+"]){1,5})");//rajouter la fin du motif de répétition
+     	 Parameter param=Parameter.getInstance();
+    	 int maxValue=param.getNumberOfValueAvailableByFamily().length;
+    	
+   	 	pattern = Pattern.compile("(([1-"+maxValue+"]\\s["+correctGroup+"])(\\s[;]\\s[1-"+maxValue+"]\\s["+correctGroup+"]){1,"+maxValue+"})");//rajouter la fin du motif de répétition
         matcher = pattern.matcher(comparante);
     	return matcher.find();
     }
@@ -103,7 +105,14 @@ public class Dialogue {
     public static boolean isInformationGroup(String s) {
     	Pattern pattern;
    	 	Matcher matcher;
-   	 	pattern = Pattern.compile("([1-5]\\s[1-5WGYRB]\\s[;])");//rajouter la fin du motif de répétition
+   	 Parameter param=Parameter.getInstance();
+	 int maxValue=param.getNumberOfValueAvailableByFamily().length;
+	 String[] forPattern=param.getColorFamily();
+	 String letterPattern="";
+	 for(String a : forPattern) {
+		 letterPattern+=a.charAt(0);
+	 }
+   	 	pattern = Pattern.compile("([1-"+maxValue+"]\\s[1-"+maxValue+letterPattern+"]\\s[;])");//rajouter la fin du motif de répétition
         matcher = pattern.matcher(s);
     	return matcher.find();
     }
