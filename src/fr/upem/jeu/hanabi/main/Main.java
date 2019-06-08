@@ -89,119 +89,122 @@ public class Main {
               return ;
             }
           }
-          System.out.println("String rentree "+read);
-          /*if (read.charAt(0)=='q') {
-            System.out.println("Goodbye");
-            return ;
-          }*/
-          
-          int rankCardToDo=Integer.parseInt(String.valueOf(read.charAt(4)));
-          d=board.getDeck();
-          graveyard=board.getDiscard();
-          /*Déterminer l'action*/
-          switch(read.charAt(0)) {
-            case 's':
-            int rankCardSecondAction=Integer.parseInt(String.valueOf(read.charAt(6)));
-            hands.get(i).swap(rankCardToDo, rankCardSecondAction);
-            board.setGamerPlace(hands);
-            i--;
-            break;
-            case 'a':
-            System.out.println(board.getDiscard());
-            break;
-            case 'q':
+          if (read.charAt(0)=='q') { /*On ne peut pas mettre les cas 'q' et 'a' dans le switch car
+           							read n'est donc que de taille 1, or on fait rankCardToDo=...read.charAt(4), ce qui ferait donc planter le programme*/
             System.out.println("Goodbye");
             board.fireworksResult();
             return ;
-            case 'd':
-            card=d.draw();
-            discarded = hands.get(i).discard(rankCardToDo);
-            hands.get(i).addCard(card);
-            graveyard.addCard(discarded);
-            board.setDeck(d);
-            board.setGamerPlace(hands);
-            board.setDiscard(graveyard);
-            //get one token for it
-        	  try {
-           		  bank=board.getControlBank();
-        		  bank.addToken();
-            	  board.setControlBank(bank);  
-            	  //donnez les informations
-        	  }catch(IllegalArgumentException e) {
-        		  System.out.println("Vous avez trop de jeton !donnez une information ou jouez une carte.");
-        		  i--;
-        	  }
-            
-            break;
-            case 'p':
-            card=d.draw();
-            discarded = hands.get(i).discard(rankCardToDo);
-            int whereToPut=Integer.parseInt(String.valueOf(read.charAt(6)));;
-              //erreur lors du placement de carte
-            if (!(board.putCard(discarded,whereToPut))) {
-              Token errors = board.getBankError();
-              errors.removeToken();
-              board.setBankError(errors);
-              graveyard.addCard(discarded);
-              board.setDiscard(graveyard);
-              
-            }
-            hands.get(i).addCard(card);
-            board.setGamerPlace(hands);
-            break;
-          case 'i':
-        	  //dit l'info a quelqu'un l'enregistrer dans son systeme de dialogue
-        	  /*
-        	   * pour cela, regarder l'id du =dit joueur 
-        	   * */
-        	  int getter;
-        	  if(Dialogue.isInformationGroup(read)) {
-        		 
-        		  if(Dialogue.isInformationGroupCorrect(read)) {
-        			 /*vérifier que du texte n'a pas été oublié*/
-        			 getter=Integer.parseInt(""+read.charAt(4))-1;
-        			 dia= hands.get(getter).getMemory();
-             		 dia.addMemory(read);
-             		 hands.get(getter).setMemory(dia);
-             		 board.setGamerPlace(hands);
-        		  }
-        		  else {
-        			   getter=Integer.parseInt(""+read.charAt(4))-1;
-        			  String withoutGroup=read.substring(0, 8);
-        			  dia= hands.get(getter).getMemory();
-             		 dia.addMemory(withoutGroup);
-             		 hands.get(getter).setMemory(dia);
-             		 board.setGamerPlace(hands);
-        			  
-        		  }
-        	  }
-        	  else {
-        		 getter=Integer.parseInt(""+read.charAt(4))-1;
-        		 System.out.println(hands);
-        		
-        		 dia= hands.get(getter).getMemory();
-        		 dia.addMemory(read);
-        		 hands.get(getter).setMemory(dia);
-        		 board.setGamerPlace(hands);
-        	  }
-        	  try {
-        		 dia= hands.get(i).getMemory();
-         		 dia.forget();
-         		 hands.get(i).setMemory(dia);
-         		 board.setGamerPlace(hands);
-        		  //gérer les échanges de jeton
-           		  bank=board.getControlBank();
-        		  bank.removeToken();
-            	  board.setControlBank(bank);  
-            	  //donnez les informations
-        	  }catch(IllegalArgumentException e) {
-        		  System.out.println("Vous n'avez plus de jeton ! défaussez ou jouez une carte.");
-        		  i--;
-        	  }
-        	 
-          break;
+          }
+          else if (read.charAt(0)=='a') {	
+        	  System.out.println(board.getDiscard());
+        	  i--; //Cela permettra au joueur qui a demand� � afficher la d�fausse de pouvoir jouer son tour par la suite.
+          }
+          else {
+	          int rankCardToDo=Integer.parseInt(String.valueOf(read.charAt(4)));
+	          d=board.getDeck();
+	          graveyard=board.getDiscard();
+	          /*Déterminer l'action*/
+	          switch(read.charAt(0)) {
+	            case 's':
+	            int rankCardSecondAction=Integer.parseInt(String.valueOf(read.charAt(6)));
+	            hands.get(i).swap(rankCardToDo, rankCardSecondAction);
+	            board.setGamerPlace(hands);
+	            i--;
+	            break;
+	            
+	            case 'q':
+	            System.out.println("Goodbye");
+	            
+	            return ;
+	            case 'd':
+	            card=d.draw();
+	            discarded = hands.get(i).discard(rankCardToDo);
+	            hands.get(i).addCard(card);
+	            graveyard.addCard(discarded);
+	            board.setDeck(d);
+	            board.setGamerPlace(hands);
+	            board.setDiscard(graveyard);
+	            //get one token for it
+	        	  try {
+	           		  bank=board.getControlBank();
+	        		  bank.addToken();
+	            	  board.setControlBank(bank);  
+	            	  //donnez les informations
+	        	  }catch(IllegalArgumentException e) {
+	        		  System.out.println("Vous avez trop de jeton !donnez une information ou jouez une carte.");
+	        		  i--;
+	        	  }
+	            
+	            break;
+	            case 'p':
+	            card=d.draw();
+	            discarded = hands.get(i).discard(rankCardToDo);
+	            int whereToPut=Integer.parseInt(String.valueOf(read.charAt(6)));;
+	              //erreur lors du placement de carte
+	            if (!(board.putCard(discarded,whereToPut))) {
+	              Token errors = board.getBankError();
+	              errors.removeToken();
+	              board.setBankError(errors);
+	              graveyard.addCard(discarded);
+	              board.setDiscard(graveyard);
+	              
+	            }
+	            hands.get(i).addCard(card);
+	            board.setGamerPlace(hands);
+	            break;
+	          case 'i':
+	        	  //dit l'info a quelqu'un l'enregistrer dans son systeme de dialogue
+	        	  /*
+	        	   * pour cela, regarder l'id du =dit joueur 
+	        	   * */
+	        	  int getter;
+	        	  if(Dialogue.isInformationGroup(read)) {
+	        		 
+	        		  if(Dialogue.isInformationGroupCorrect(read)) {
+	        			 /*vérifier que du texte n'a pas été oublié*/
+	        			 getter=Integer.parseInt(""+read.charAt(4))-1;
+	        			 dia= hands.get(getter).getMemory();
+	             		 dia.addMemory(read);
+	             		 hands.get(getter).setMemory(dia);
+	             		 board.setGamerPlace(hands);
+	        		  }
+	        		  else {
+	        			   getter=Integer.parseInt(""+read.charAt(4))-1;
+	        			  String withoutGroup=read.substring(0, 8);
+	        			  dia= hands.get(getter).getMemory();
+	             		 dia.addMemory(withoutGroup);
+	             		 hands.get(getter).setMemory(dia);
+	             		 board.setGamerPlace(hands);
+	        			  
+	        		  }
+	        	  }
+	        	  else {
+	        		 getter=Integer.parseInt(""+read.charAt(4))-1;
+	        		 System.out.println(hands);
+	        		
+	        		 dia= hands.get(getter).getMemory();
+	        		 dia.addMemory(read);
+	        		 hands.get(getter).setMemory(dia);
+	        		 board.setGamerPlace(hands);
+	        	  }
+	        	  try {
+	        		 dia= hands.get(i).getMemory();
+	         		 dia.forget();
+	         		 hands.get(i).setMemory(dia);
+	         		 board.setGamerPlace(hands);
+	        		  //gérer les échanges de jeton
+	           		  bank=board.getControlBank();
+	        		  bank.removeToken();
+	            	  board.setControlBank(bank);  
+	            	  //donnez les informations
+	        	  }catch(IllegalArgumentException e) {
+	        		  System.out.println("Vous n'avez plus de jeton ! défaussez ou jouez une carte.");
+	        		  i--;
+	        	  }
+	        	 
+	          break;
+	        }
         }
-         
         /*Changement de tour*/
           if(i==board.getGamerPlace().size()-1) {
         	  i=0;

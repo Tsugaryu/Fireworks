@@ -163,8 +163,13 @@ public class Dialogue {
     	StringBuilder toSay=new StringBuilder(); 
     	toSay.append("Card ");
 		 toSay.append(s.charAt(0));
-		 toSay.append(" value is ");
-		 //System.out.println(s);
+		 Pattern p=Pattern.compile("..\\d");
+		 Matcher c=p.matcher(s);
+		 if (c.find())	
+			 toSay.append(" value is ");
+		 else
+			 toSay.append(" color is ");
+		 System.out.println(s);
 		 Parameter param=Parameter.getInstance();
 		 String[] color=param.getColorFamily();
 		 /*for(String a : color) {
@@ -172,7 +177,6 @@ public class Dialogue {
 		 }*/
 		 for(int i=0;i<color.length;i++) {
 			 if(color[i].charAt(0)==s.charAt(2)) {
-				 System.out.println("les valeurs sont égales");
 				 toSay.append(color[i]);
 				 break;
 			 }
