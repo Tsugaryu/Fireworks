@@ -1,9 +1,7 @@
 package fr.upem.jeu.hanabi.main;
 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 import fr.upem.jeu.hanabi.game.Board;
@@ -13,7 +11,7 @@ import fr.upem.jeu.hanabi.game.content.Token;
 import fr.upem.jeu.hanabi.game.stack.Deck;
 import fr.upem.jeu.hanabi.game.stack.Discard;
 import fr.upem.jeu.hanabi.io.Dialogue;
-import fr.upem.jeu.hanabi.io.Parameter;
+
 
 
 /**
@@ -26,7 +24,7 @@ public class Main {
 	}  
 
     public static void main(String[] args) {
-      int numberPlayer=0,selectMode=6;
+      int numberPlayer=Menu.menu();
       String read ="";
       Deck d;
       Card card;
@@ -34,66 +32,34 @@ public class Main {
       Card discarded;
       Token bank;
       Dialogue dia;
-      Parameter param;
+      
       ArrayList<HandPlayer> hands;
-      try{
-        InputStreamReader ise=new InputStreamReader(System.in);
-        BufferedReader be=new BufferedReader(ise);
-        System.out.println("Menu : For select Default parameter enter 1. For loading the parameter file enter 2. For changing it enter 3 ");
-        while(selectMode>3 ||selectMode<1) {
-        	 read=be.readLine();
-             if(!read.contains(" ")) {
-           	  selectMode=Integer.parseInt(read);	  
-             }
-        }
-        switch(selectMode) {
-        case 1 :param=Parameter.loadDefaultParameter();
-        	break;
-        case 2 :param=Parameter.readFileParameter();
-        	break;
-        case 3 :param=Parameter.modifyParameterByGame();
-        	break;
-        default:param=Parameter.loadDefaultParameter();
-        }
-        while(numberPlayer<2 || numberPlayer>param.getMaxPlayer()) {
-          System.out.println("How many players will playing ?");
-          read=be.readLine();
-          if(!read.contains(" ")) {
-        	  numberPlayer=Integer.parseInt(read);	  
-          }
-        
-        }
-        
-        
-      }catch(IOException e){
-        System.err.println("Reading line error,exiting the program");
-        return;
-      }
+      
       Board board=Board.createBoard(numberPlayer);
       hands=board.getGamerPlace();
-        int i=0; // (i+1) correspond au numero du joueur en train de jouer
-        Dialogue.printTutorial();
-        //boucle de tour de joueur
-        while(!board.end()){
-          System.out.println(board);
-          read=" "; // on initialise read pour qu'on puisse passer dans la boucle suivante
-          System.out.println("It is Player " + (i+1)+" turn");
-          System.out.println("Information :");
-          System.out.println(hands.get(i).getMemory().toString());
-          
-          while (!Dialogue.isFormatCorrect(read)) {
-            try {
-              read=HandPlayer.readActionPlayer();
-            }catch(IOException e) {
-              System.out.println("Fin du jeu probleme de lecture");
-              return ;
-            }
+      int i=0; // (i+1) correspond au numero du joueur en train de jouer
+      Dialogue.printTutorial();
+      //boucle de tour de joueur
+      while(!board.end()){
+    	  System.out.println(board);
+    	  read=" "; // on initialise read pour qu'on puisse passer dans la boucle suivante
+    	  System.out.println("It is Player " + (i+1)+" turn");
+    	  System.out.println("Action :");
+    	  System.out.println(hands.get(i).getMemory().toString());
+
+    	  while (!Dialogue.isFormatCorrect(read)) {
+    		  try {
+    			  read=HandPlayer.readActionPlayer();
+    		  }catch(IOException e) {
+    			  System.out.println("Fin du jeu probleme de lecture");
+    			  return ;
+    		  }
           }
           if (read.charAt(0)=='q') { /*On ne peut pas mettre les cas 'q' et 'a' dans le switch car
            							read n'est donc que de taille 1, or on fait rankCardToDo=...read.charAt(4), ce qui ferait donc planter le programme*/
-            System.out.println("Goodbye");
-            board.fireworksResult();
-            return ;
+        	  System.out.println("Goodbye");
+        	  board.fireworksResult();
+        	  return ;
           }
           else if (read.charAt(0)=='a') {	
         	  System.out.println(board.getDiscard());
@@ -105,7 +71,7 @@ public class Main {
 	          graveyard=board.getDiscard();
 	          /*Déterminer l'action*/
 	          switch(read.charAt(0)) {
-	            case 's':
+	          	case 's':
 	            int rankCardSecondAction=Integer.parseInt(String.valueOf(read.charAt(6)));
 	            hands.get(i).swap(rankCardToDo, rankCardSecondAction);
 	            board.setGamerPlace(hands);
@@ -125,15 +91,15 @@ public class Main {
 	            board.setGamerPlace(hands);
 	            board.setDiscard(graveyard);
 	            //get one token for it
-	        	  try {
-	           		  bank=board.getControlBank();
-	        		  bank.addToken();
-	            	  board.setControlBank(bank);  
-	            	  //donnez les informations
-	        	  }catch(IllegalArgumentException e) {
-	        		  System.out.println("Vous avez trop de jeton !donnez une information ou jouez une carte.");
-	        		  i--;
-	        	  }
+	        	try {
+	           	  bank=board.getControlBank();
+	        	  bank.addToken();
+	              board.setControlBank(bank);  
+	              //donnez les informations
+	        	}catch(IllegalArgumentException e) {
+	        		System.out.println("Vous avez trop de jeton !donnez une information ou jouez une carte.");
+	        		i--;
+	        	}
 	            
 	            break;
 	            case 'p':
@@ -152,7 +118,7 @@ public class Main {
 	            hands.get(i).addCard(card);
 	            board.setGamerPlace(hands);
 	            break;
-	          case 'i':
+	            case 'i':
 	        	  //dit l'info a quelqu'un l'enregistrer dans son systeme de dialogue
 	        	  /*
 	        	   * pour cela, regarder l'id du =dit joueur 
@@ -198,7 +164,7 @@ public class Main {
 	            	  board.setControlBank(bank);  
 	            	  //donnez les informations
 	        	  }catch(IllegalArgumentException e) {
-	        		  System.out.println("Vous n'avez plus de jeton ! défaussez ou jouez une carte.");
+	        		  System.out.println("Vous n'avez plus de jeton ! D�faussez ou jouez une carte.");
 	        		  i--;
 	        	  }
 	        	 
