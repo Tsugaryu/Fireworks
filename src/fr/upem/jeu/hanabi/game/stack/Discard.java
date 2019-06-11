@@ -17,7 +17,7 @@ public class Discard {
      * Structure which contains the card discarded by players.
      * @since 0.1
      */
-    private LinkedList<Card> discard;
+    private final LinkedList<Card> discard;
 
     /**
      * Singleton of a discard.
@@ -45,7 +45,7 @@ public class Discard {
     }
 
 
-    private  Discard() {
+    private Discard() {
     	this.discard=new LinkedList<Card>();
     }
 
@@ -76,7 +76,7 @@ public class Discard {
      * */
     public void addCard(Card d) {
     	this.discard.addFirst(d);
-    	this.top=d;
+    	this.top=Objects.requireNonNull(d);
     }
 
 }

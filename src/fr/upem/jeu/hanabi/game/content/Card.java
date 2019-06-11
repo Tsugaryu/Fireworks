@@ -1,5 +1,7 @@
 package fr.upem.jeu.hanabi.game.content;
 
+import java.util.Objects;
+
 import fr.upem.jeu.hanabi.io.Parameter;
 
 /**
@@ -32,7 +34,6 @@ public class Card {
         StringBuilder builder=new StringBuilder();
         Parameter param=Parameter.getInstance();
         String[] allColors=param.getColorFamily();
-      
         if (this.color==-1)
         	return "  ";
         char letter=allColors[this.color].charAt(0);
@@ -52,7 +53,7 @@ public class Card {
     public boolean equals(Object o) {
     	if (!(o instanceof Card)) {return false;    }
     	Card c=(Card)o;
-    	return c.color==this.color && c.value==this.value;
+    	return (c.color==this.color && c.value==this.value);
     }
 
     /**
@@ -64,8 +65,8 @@ public class Card {
      * @since 0.1 ;
      */
     public Card(int color, int value){
-    	this.color=color;
-        this.value=value;
+    	this.color=Objects.requireNonNull(color);
+        this.value=Objects.requireNonNull(value);
     }
     
 

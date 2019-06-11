@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import fr.upem.jeu.hanabi.game.content.Card;
 import fr.upem.jeu.hanabi.io.Dialogue;
@@ -24,7 +25,7 @@ public class HandPlayer {
      * Hand of the player.
      * @since 0.1
      */
-    private ArrayList<Card> hand;
+    private final ArrayList<Card> hand;
 
     /**
      * Id of a player.
@@ -52,7 +53,7 @@ public class HandPlayer {
      * @param d dialogue to actualize
      * */
     public void setMemory(Dialogue d) {
-    	this.memory=d;
+    	this.memory=Objects.requireNonNull(d);
     	
     }
     /**
@@ -215,8 +216,8 @@ public class HandPlayer {
        if(hand.size()==0) {
     	   throw new IllegalArgumentException("The hand of a playercannot be of 0");
        }*/
-       this.idPlayer=id;
-       this.hand=hand;
+       this.idPlayer=Objects.requireNonNull(id);
+       this.hand=Objects.requireNonNull(hand);
        this.memory=new Dialogue();
     }
    /**

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 /**
@@ -75,11 +76,10 @@ public final class Parameter {
 		if(numberOfCardPlayer<=1) {
 			   throw new IllegalArgumentException("A player must have at least 2 cards at maximum in his hands.");
 		}
-		this.maxPlayer=maxPlayer;
-		this.numberOfCardByPlayer=numberOfCardPlayer;
+		this.maxPlayer=Objects.requireNonNull(maxPlayer);
+		this.numberOfCardByPlayer=Objects.requireNonNull(numberOfCardPlayer);
 		this.colorFamily= this.upperCase(color);
-		this.numberOfValueAvailableByFamily=numberOfValue;
-		// TODO Auto-generated constructor stub
+		this.numberOfValueAvailableByFamily=Objects.requireNonNull(numberOfValue);
 	}
 	/**
 	 * @return the current instance of Parameter object.
@@ -167,11 +167,13 @@ public final class Parameter {
   	        	 
   	           
         	 }catch(IOException e) {
+        		 scan.close();
         		throw new IOException("Problem at the reading or the closing"); 
         	 }
         	 
          }
          Parameter.singleton=param;
+         scan.close();
 		return param; 
 	}
 	/**

@@ -21,7 +21,7 @@ public final class Board {
     /**
      * Place where the fireworks are put.
      */
-    private Card[] board;
+    private final Card[] board;
 
     /**
      * Representation of the place and hand of the players.
@@ -66,21 +66,21 @@ public final class Board {
      * @param tok to set
      * */
    public void setControlBank(Token tok) {
-    	this.bankControl=tok;
+    	this.bankControl=Objects.requireNonNull(tok);
     }
     /**
      * Setter of @see turn
      * @param tour = number of tour
      * */
-  public  void setTurn(int tour){
-    		this.turn=tour;
+   public void setTurn(int tour){
+    		this.turn=Objects.requireNonNull(tour);
     	}
     /**
      * Update gamers hand.
      * @param gamers hand of the player
      */
     public void setGamerPlace(ArrayList<HandPlayer> gamers) {
-    	this.gamerPlace=gamers;
+    	this.gamerPlace=Objects.requireNonNull(gamers);
     }
     /**
      * getter of @see gamerplace
@@ -137,7 +137,7 @@ public final class Board {
     	if(j.size()<=1) {
     		throw new IllegalArgumentException("You cannot have less than 2 two players !");
     	}
-    	this.gamerPlace=j;
+    	this.gamerPlace=Objects.requireNonNull(j);
     	this.bankError=new Token(3);
     	this.bankControl=new Token(8);
     	this.board=new Card[5];
@@ -214,7 +214,7 @@ public final class Board {
      * @param d = new discard toSet
      * */
    public  void setDiscard(Discard d) {
-    	this.graveyard=d;
+    	this.graveyard=Objects.requireNonNull(d);
     }
     /**
      * Getter of @see bankError
@@ -228,7 +228,7 @@ public final class Board {
      * @param bankError to set
      * */
     public void setBankError(Token bankError) {
-		this.bankError = bankError;
+		this.bankError = Objects.requireNonNull(bankError);
 	}
     /**
      * Getter of @see deck
@@ -242,7 +242,7 @@ public final class Board {
      * @param deck deck value to set
      * */
     public void setDeck(Deck deck) {
-		this.deck = deck;
+		this.deck = Objects.requireNonNull(deck);
 	}
     /**
      * @return the representation of Board

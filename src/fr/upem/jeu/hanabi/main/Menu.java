@@ -63,25 +63,44 @@ public class Menu {
 		return numberPlayer;
 	}
 	
-	
+	/**
+     * Play the card number rankCardToDo in the hand of the player n°i at the place whereToPut in the board.
+     * If the card does not match with the place the player had chosen, set the card in the discard and remove one error token.
+     * Else, set the card on the board, and make a draw for the player who played the card
+     */
 	public static void playACard(Board board,Deck d,String read,Discard graveyard, ArrayList<HandPlayer> hands,int i, int rankCardToDo) {
 		Card card,discarded;
 		card=d.draw();
         discarded = hands.get(i).discard(rankCardToDo);
         int whereToPut=Integer.parseInt(String.valueOf(read.charAt(6)));;
-          //erreur lors du placement de carte
-        if (!(board.putCard(discarded,whereToPut))) {
+        if (!(board.putCard(discarded,whereToPut))) { // si le joueur a essayé de mettre une carte qui ne convient pas.
           Token errors = board.getBankError();
           errors.removeToken();
           board.setBankError(errors);
           graveyard.addCard(discarded);
           board.setDiscard(graveyard);
         }
+        else { //Le joueur a placé une carte correctement. On vérifie si le joueur a placé une carte 5. Si oui, on doit ajouter un jeton dans la controlBank.
+        	if (discarded.getValue()==5) {
+        		Token bank =board.getControlBank();
+        		System.out.println("Vous avez bien placé une carte de valeur 5. Vous obtenez un control Token !");
+        		if (!bank.isLimit()) {
+        			bank.addToken();
+        			board.setControlBank(bank);
+        		}
+        	}
+        }
         hands.get(i).addCard(card);
         board.setGamerPlace(hands);
 	}
 	
+	
+	/**
+     * Give the information contained in read to the player n°i, and stock it in his dialogue system.
+     */
 	public static void giveAnIntel(Board board, String read, ArrayList<HandPlayer> hands, int i) {
+		//Donne une information à quelqu'un et l'enregistre dans son système de dialogue.
+		//Pour cela on utilise l'entier i, correspondant au numéro du dit joueur.
 		int getter;
 		Dialogue dia;
 		Token bank=board.getControlBank();
@@ -107,7 +126,6 @@ public class Menu {
   	  }
   	  else {
   		 getter=Integer.parseInt(""+read.charAt(4))-1;
-  		 System.out.println(hands);
   		
   		 dia= hands.get(getter).getMemory();
   		 dia.addMemory(read);
@@ -119,17 +137,22 @@ public class Menu {
    		 dia.forget();
    		 hands.get(i).setMemory(dia);
    		 board.setGamerPlace(hands);
-  		  //gÃ©rer les Ã©changes de jeton
+  		  //gérer les échanges de jetons
      		  bank=board.getControlBank();
   		  bank.removeToken();
       	  board.setControlBank(bank);  
-      	  //donnez les informations
-  	  }catch(IllegalArgumentException e) {
+      	  //donner les informations
+  	  }catch(IllegalStateException e) {
   		  System.out.println("Vous n'avez plus de jeton ! Défaussez ou jouez une carte.");
   		  i--;
   	  }
 	}
 	
+	
+	
+	/**
+     * Discard the card number rankCardToDo of the player n°i and add it in the graveyard
+     */
 	public static void discardACard(Board board,int i, int rankCardToDo, ArrayList<HandPlayer> hands, Discard graveyard,Deck d) {
 		Token bank=board.getControlBank();
 		Card card,discarded;
@@ -146,7 +169,7 @@ public class Menu {
     	  bank.addToken();
           board.setControlBank(bank);  
           //donnez les informations
-    	}catch(IllegalArgumentException e) {
+    	}catch(IllegalStateException e) {
     		System.out.println("Vous avez trop de jeton !donnez une information ou jouez une carte.");
     		i--;
     	}

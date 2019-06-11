@@ -3,6 +3,7 @@ package fr.upem.jeu.hanabi.game.stack;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,7 +25,7 @@ public final class Deck {
      * represents the card stack.
      * @since 0.1.
      */
-    private LinkedList<Card> draw;
+    private final LinkedList<Card> draw;
     
     private static volatile Deck singleton=null;
 
@@ -84,7 +85,7 @@ public final class Deck {
     /*on ne met pas de javadoc*/   
     private Deck(LinkedList<Card> d) {
     	if(d.size()==0)throw new IllegalArgumentException("You cannot create a deck with no card !");
-    	this.draw=d;
+    	this.draw=Objects.requireNonNull(d);
     }
     
     /**

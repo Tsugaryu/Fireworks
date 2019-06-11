@@ -12,7 +12,7 @@ public class Dialogue {
     /**
      * Actual Memory of a gamer.
      */
-    private StringBuilder shortMemoryGamer;
+    private final StringBuilder shortMemoryGamer;
     
     /*
      * ajoute information donné par un joueur chaque info est séparé par un ;  et est concaténé dans un builder
@@ -23,8 +23,8 @@ public class Dialogue {
    * @param newInfo new information to memorize.  
    * */
   public void addMemory(String newInfo) {
-    		this.shortMemoryGamer.append(newInfo.substring(6));
-    		this.shortMemoryGamer.append(" /");	// char which separe each information
+    	this.shortMemoryGamer.append(newInfo.substring(6));
+    	this.shortMemoryGamer.append(" /");	// char which separe each information
   }
   /**
    * Constructor of Dialogue.
@@ -49,17 +49,14 @@ public class Dialogue {
 	  String [] group;
 	  for(String s : eachMessage) {
 		  if(Dialogue.isInformationGroup(s)) {
-			  System.out.println("IS A GROUP");
 			  group=this.createGroup(s);
 			 
 			  for(String subgroup : group) {
-				  System.out.println(subgroup); 
 				  toSay.append(this.convertToSpeak(subgroup));
 				  toSay.append(newLine);  
 			  }
 		  }
 		  else {
-			  System.out.println(s);
 			  toSay.append(this.convertToSpeak(s));
 			  toSay.append(newLine);  
 		  }
@@ -76,7 +73,7 @@ public class Dialogue {
   	 * */
     public void forget(){
     	System.out.println(this.shortMemoryGamer.toString());
-    	if(this.shortMemoryGamer.toString()=="")return;
+    	if(this.shortMemoryGamer.toString().equals(""))return;
     	this.shortMemoryGamer.delete(0,this.shortMemoryGamer.toString().length());
     }
    

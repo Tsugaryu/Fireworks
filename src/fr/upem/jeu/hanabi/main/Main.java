@@ -36,8 +36,9 @@ public class Main {
     	  System.out.println(board);
     	  read=" "; // on initialise read pour qu'on puisse passer dans la boucle suivante
     	  System.out.println("It is Player " + (i+1)+" turn");
-    	  System.out.println("Action :");
     	  System.out.println(hands.get(i).getMemory().toString());
+    	  System.out.println("Action :");
+    	  
 
     	  while (!Dialogue.isFormatCorrect(read)) {
     		  try {
@@ -69,11 +70,6 @@ public class Main {
 	            board.setGamerPlace(hands);
 	            i--;
 	            break;
-	            
-	            case 'q':
-	            System.out.println("Goodbye");
-	            
-	            return ;
 	            case 'd':
 	            Menu.discardACard(board, i, rankCardToDo, hands, graveyard, d);
 	            
@@ -82,24 +78,19 @@ public class Main {
 	            Menu.playACard(board, d, read, graveyard, hands, i, rankCardToDo);
 	            break;
 	            case 'i':
-	        	  //dit l'info a quelqu'un l'enregistrer dans son systeme de dialogue
-	        	  /*
-	        	   * pour cela, regarder l'id du dit joueur 
-	        	   * */
 	        	  Menu.giveAnIntel(board, read, hands, i);
-	          break;
+	        	  break;
 	        }
         }
         /*Changement de tour*/
-          if(i==board.getGamerPlace().size()-1) {
-        	  i=0;
-          }
-          else
-        	  i++;
-          board.setTurn(i);
+        if(i==board.getGamerPlace().size()-1) {
+        	i=0;
+        }
+        else
+        	i++;
+        board.setTurn(i);
        
-        
       }
         board.fireworksResult();
     }
-  }
+}

@@ -1,5 +1,6 @@
 package fr.upem.jeu.hanabi.game.content;
 
+import java.util.Objects;
 
 /**@author : Raphael BOURJOT
  * @version 1.0
@@ -27,8 +28,8 @@ public class Token {
      *      */
     public Token(int max) {
     	if(max<=0)   throw new IllegalArgumentException("Token cannot be empty or negative at his creation");
-        this.maxToken=max;
-        this.number=max;
+        this.maxToken=Objects.requireNonNull(max);
+        this.number=Objects.requireNonNull(max);
     }
 
 
@@ -37,7 +38,8 @@ public class Token {
      * @throws IllegalStateException when you try to remove a token when the stack is empty.
      */
     public void removeToken()throws IllegalStateException {
-    	if (isEmpty())throw new IllegalStateException("You can't have less token than zero!");
+    	if (this.isEmpty())
+    		throw new IllegalStateException("You can't have less token than zero!");
         this.number-=1;
     }
 
