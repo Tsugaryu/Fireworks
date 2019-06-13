@@ -71,7 +71,7 @@ public final class Parameter {
 	}
 	private Parameter(int maxPlayer,int numberOfCardPlayer,String[] color,int[] numberOfValue) {
 		if(maxPlayer<=1) {
-			   throw new IllegalArgumentException("There must be at least 2player");
+			   throw new IllegalArgumentException("There must be at least 2 players");
 					   }
 		if(numberOfCardPlayer<=1) {
 			   throw new IllegalArgumentException("A player must have at least 2 cards at maximum in his hands.");
@@ -102,7 +102,7 @@ public final class Parameter {
 	    String[] colorWithIt;
 	    int[]  numberOfValueAvailableByFamily;
 		Parameter param ;
-		 Pattern p = Pattern.compile("-");
+		Pattern p = Pattern.compile("-");
 		Scanner scan=new Scanner(System.in);
 		System.out.println("What is the maximum number of player ?");
 		maxPlayer=scan.nextInt();
@@ -167,18 +167,16 @@ public final class Parameter {
   	        	 
   	           
         	 }catch(IOException e) {
-        		 scan.close();
         		throw new IOException("Problem at the reading or the closing"); 
         	 }
         	 
          }
          Parameter.singleton=param;
-         scan.close();
 		return param; 
 	}
 	/**
 	 * Load the file at /paramaters/parameter.txt
-	 *  @return parameter or a default prarameter if problems
+	 *  @return parameter or a default parameter if problems
 	 *  @throws IOException when problem with the files
 	 * */
 	public static Parameter readFileParameter() throws IOException {

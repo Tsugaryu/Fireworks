@@ -1,4 +1,4 @@
-Max Player = 4
-Card Number = 5
-Color are : CYAN-YELLOW-BLACK-PURPLE-RED
+Max Player = 6
+Card Number = 8
+Color are : ARGENT-BLACK-CYAN-MAGENTA-ORANGE
 NumberCardByColor : 1=3-2=2-3=2-4=2-5=1
